@@ -1,0 +1,10 @@
+#profilePic{
+	background-color: rgba(1,222,1,0.8);
+	border-radius: 50%;
+	text-align:center;
+		margin-top: 10vh;
+        float: none;
+        margin: 0 auto;
+	height:100px;
+	width:100px;
+}

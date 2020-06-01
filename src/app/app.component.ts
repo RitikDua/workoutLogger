@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {BottomNavItem} from 'ngx-bottom-nav';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'workoutLogger';
+  items: BottomNavItem[] = [
+    {icon: 'bar_chart', label: 'stats', routerLink: 'stats'},
+    {icon: 'add', label: 'Add', routerLink: 'add'},
+    {icon: 'account_circle', label: 'Profile', routerLink: 'profile'},
+  ];
 }
