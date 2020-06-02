@@ -12,6 +12,7 @@ import { AddComponent } from './components/add/add.component';
 import {BottomNavModule} from 'ngx-bottom-nav';
 import { StatsComponent } from './components/stats/stats.component';
 import { WeekroutineComponent } from './components/profile/weekroutine/weekroutine.component';
+import { AddsetsComponent } from './components/add/addsets/addsets.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { WeekroutineComponent } from './components/profile/weekroutine/weekrouti
     ProfileComponent,
     AddComponent,
     StatsComponent,
-    WeekroutineComponent
+    WeekroutineComponent,
+    AddsetsComponent
   ],
   imports: [
     BrowserModule,
