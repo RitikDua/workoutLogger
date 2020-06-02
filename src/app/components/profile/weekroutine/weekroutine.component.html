@@ -9,7 +9,7 @@
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
     <input
-      placeholder="New fruit..."
+      placeholder="New Exercise..."
       #fruitInput
       [formControl]="fruitCtrl"
       [matAutocomplete]="auto"
@@ -24,5 +24,5 @@
   </mat-autocomplete>
 </mat-form-field>
  <div>
-        <button mat-button matStepperNext (click)="_sendToParent()">Next</button>
+  <button mat-mini-fab matStepperNext color="primary" (click)="_sendToParent()"><mat-icon aria-hidden="false" aria-label="done">done</mat-icon></button>
       </div>
