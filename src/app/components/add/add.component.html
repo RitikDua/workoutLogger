@@ -1,1 +1,18 @@
-<p>add works!</p>
+
+<mat-vertical-stepper [linear]="true" #stepper >
+  <mat-step *ngFor="let exercise of exercisesList" >
+     <ng-template matStepLabel>
+         {{exercise}}
+     </ng-template>
+
+
+     <app-addsets [exercise]="exercise" (notify)="changeFromChild($event)"></app-addsets>
+
+
+
+
+
+
+
+    </mat-step>
+</mat-vertical-stepper>
