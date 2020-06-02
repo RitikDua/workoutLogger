@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import {WeekroutineComponent} from './weekroutine/weekroutine.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}
+  }]
 })
 export class ProfileComponent implements OnInit {
   //for testing
-	userName:String="Ritik";
+	username:String="Ritik";
 	weight:Number;
 	height:Number;
 	
@@ -25,9 +31,13 @@ export class ProfileComponent implements OnInit {
 	{day:"Sunday",key:"seventhStep"}];
  
   exerciseMap=new Map();
-  constructor() { }
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
-  ngOnInit(): void {
-  }
+ isLinear = false;
 
+  constructor(private _formBuilder: FormBuilder) {}
+
+  ngOnInit() {
+ 	}
 }

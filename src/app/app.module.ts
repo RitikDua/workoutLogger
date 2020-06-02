@@ -11,13 +11,15 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AddComponent } from './components/add/add.component';
 import {BottomNavModule} from 'ngx-bottom-nav';
 import { StatsComponent } from './components/stats/stats.component';
+import { WeekroutineComponent } from './components/profile/weekroutine/weekroutine.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
     AddComponent,
-    StatsComponent
+    StatsComponent,
+    WeekroutineComponent
   ],
   imports: [
     BrowserModule,

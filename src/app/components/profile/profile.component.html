@@ -2,8 +2,26 @@
 	<div id="profilePic" class="row">
 		<br /><br /><br /><br />
 	</div>
-	<div></div>
+	<div style="text-align:center"><h1>{{username}}</h1></div>
 </div>
 
 <mat-divider></mat-divider>
 <mat-divider></mat-divider>
+
+<mat-vertical-stepper [linear]="true" #stepper >
+  <mat-step *ngFor="let day of weekDays" [stepControl]="day.key">
+     <ng-template matStepLabel>
+         {{day.day}}
+     </ng-template>
+
+
+     <app-weekroutine></app-weekroutine>
+
+
+
+
+
+
+
+    </mat-step>
+</mat-vertical-stepper>
