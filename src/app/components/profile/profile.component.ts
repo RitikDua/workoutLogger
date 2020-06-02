@@ -38,6 +38,16 @@ export class ProfileComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder) {}
 
+  changeFromChild(data){
+  	console.log(data);
+  	let removeDuplicates=new Set();
+  	let arr=data.exercises;
+  	arr.forEach(i=>removeDuplicates.add(i.toLowerCase()));
+
+  	this.exerciseMap.set(data.day,removeDuplicates);
+ 	console.log(this.exerciseMap);
+  }
+
   ngOnInit() {
  	}
 }

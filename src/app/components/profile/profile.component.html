@@ -15,7 +15,7 @@
      </ng-template>
 
 
-     <app-weekroutine></app-weekroutine>
+     <app-weekroutine [today]="day.day" (notify)="changeFromChild($event)"></app-weekroutine>
 
 
 

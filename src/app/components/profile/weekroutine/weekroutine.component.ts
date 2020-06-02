@@ -1,4 +1,4 @@
-import {Output,EventEmitter, Component, OnInit } from '@angular/core';
+import {Output,EventEmitter,Input, Component, OnInit } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { ElementRef, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
@@ -12,6 +12,8 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./weekroutine.component.css']
 })
 export class WeekroutineComponent implements OnInit {
+  @Output() notify:EventEmitter<Object>=new EventEmitter<Object>();;
+  @Input() today:String;
 
   visible = true;
   selectable = true;
@@ -19,8 +21,8 @@ export class WeekroutineComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   fruitCtrl = new FormControl();
   filteredFruits: Observable<string[]>;
-  fruits: string[] = ['Lemon'];
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+  fruits: string[] = ['rest'];
+  allFruits: string[] = ['Pushups', 'Pullups', 'Running', 'Jogging', 'Yoga'];
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -68,6 +70,10 @@ export class WeekroutineComponent implements OnInit {
     return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
   }
   ngOnInit(): void {
+  }
+
+  _sendToParent(){
+  	this.notify.emit({"day":this.today,"exercises":this.fruits});
   }
 
 }
