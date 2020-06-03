@@ -1,5 +1,6 @@
 import { Input,Output,EventEmitter,Component, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-addsets',
@@ -8,13 +9,13 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class AddsetsComponent implements OnInit {
   @Output() notify:EventEmitter<Object>=new EventEmitter<Object>();;
-  @Input() exercise:String;
+  @Input() exercise:string;
 
-  sets:Number;
-  reps:Number;
-  mins:Number;
-  hrs:Number;
-  constructor(private _snackBar: MatSnackBar) { 
+  sets:number;
+  reps:number;
+  mins:number;
+  hrs:number;
+  constructor(private userService:UserService,private _snackBar: MatSnackBar) { 
   	this.sets=this.reps=this.mins=this.hrs=0;
   }
 
@@ -37,9 +38,7 @@ export class AddsetsComponent implements OnInit {
   	}
   }	  
   isTime():boolean{
-  	if(this.exercise.toLowerCase()==="running"||this.exercise.toLowerCase()==="walking"||this.exercise.toLowerCase()==="jogging")
-  		return true;
-  	return false;
+    return this.userService.isTime(this.exercise);
   }
 
 }

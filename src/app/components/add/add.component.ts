@@ -1,34 +1,42 @@
 import {Input,Output,EventEmitter ,Component, OnInit } from '@angular/core';
 import {AddsetsComponent} from './addsets/addsets.component';
+import {UserService} from '../../services/user.service';
+import {ExerciseList} from '../../interfaces/exerciseList';
+import {EXERCISE} from '../../interfaces/exercise';
+
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-	weeks:String[]=[
-  		"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 
-  	exercisesList:String[]=[
-  		"Pushups","Running","Pullups"
-  	];	
-  		
-    weekDays:Object[]=[
-		{day:"Monday",key:"firstStep"},
-		{day:"Tuesday",key:"secondStep"},
-		{day:"Wednesday",key:"thirdStep"},
-		{day:"Thursday",key:"fourthStep"},
-		{day:"Friday",key:"fifthStep"},
-		{day:"Saturday",key:"sixthStep"},
-		{day:"Sunday",key:"seventhStep"}];
-
-	constructor() { }
-
+  weeks:string[]=[
+  "sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+  	exercisesList:ExerciseList;	
+    
+	constructor(private userService:UserService) { 
+      this.exercisesList=this.userService.getExercisesList();
+    console.log(this.exercisesList);
+  }
   	ngOnInit(): void {
   	}
 
   changeFromChild(data){
-  	console.log(data);
+      let exercise:EXERCISE;
+      exercise={hrs:null,mins:null,reps:null,sets:null};
+     if(this.userService.isTime(data.exercise))
+     {
+       exercise.hrs=data.hrs;
+       exercise.mins=data.mins;
+       this.userService.addStatsOfOneExercise((new Date()).toString().slice(0,15),data.exercise.toLowerCase(),exercise);
+     } 
+     else{
+
+       exercise.reps=data.reps;
+       exercise.sets=data.sets;
+       this.userService.addStatsOfOneExercise((new Date()).toString().slice(0,15),data.exercise.toLowerCase(),exercise);
+     }
   }
 
 
