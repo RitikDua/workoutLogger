@@ -3,5 +3,5 @@ export interface STAT{
 	date:Date;
 	weight:number;
 	height:number;
-	todayStats:OneDayStats;
+	todayStats:OneDayStats[];
 }
