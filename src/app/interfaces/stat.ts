@@ -1,6 +1,6 @@
 import {OneDayStats} from './todayStats';
 export interface STAT{
-	date:Date;
+	date:string;
 	weight:number;
 	height:number;
 	todayStats:OneDayStats[];
