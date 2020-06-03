@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WeekRoutineComponent } from './weekroutine.component';
+import { WeekroutineComponent } from './weekroutine.component';
 
-describe('WeekRoutineComponent', () => {
+describe('WeekroutineComponent', () => {
   let component: WeekroutineComponent;
   let fixture: ComponentFixture<WeekroutineComponent>;
 

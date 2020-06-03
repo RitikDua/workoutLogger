@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import {WeekroutineComponent} from './weekroutine/weekroutine.component';
+import {UserService} from '../../services/user.service';
+import {ExerciseList} from '../../interfaces/exerciseList';
 
 @Component({
   selector: 'app-profile',
@@ -17,8 +19,9 @@ export class ProfileComponent implements OnInit {
 	weight:Number;
 	height:Number;
 	
+  exercisesList:ExerciseList[];
 
-  weeks:String[]=[
+  weeks:string[]=[
   "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 
   weekDays:Object[]=[
@@ -36,16 +39,19 @@ export class ProfileComponent implements OnInit {
 
  isLinear = false;
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private userService:UserService,private _formBuilder: FormBuilder) {}
 
   changeFromChild(data){
   	console.log(data);
   	let removeDuplicates=new Set();
   	let arr=data.exercises;
   	arr.forEach(i=>removeDuplicates.add(i.toLowerCase()));
+        // this.exercisesList[data.day.toLowerCase()]= Array.from(removeDuplicates);
+    let x:string[]=[];
+    Array.from(removeDuplicates).map(i=>x.push(i.toString().toLowerCase()));
 
-  	this.exerciseMap.set(data.day,removeDuplicates);
- 	console.log(this.exerciseMap);
+    this.userService.addExercises(data.day.toLowerCase(),x);
+  console.log(this.exerciseMap);
   }
 
   ngOnInit() {
