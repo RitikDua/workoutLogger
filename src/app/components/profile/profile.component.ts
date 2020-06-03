@@ -22,16 +22,16 @@ export class ProfileComponent implements OnInit {
   exercisesList:ExerciseList[];
 
   weeks:string[]=[
-  "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+  "sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
 
   weekDays:Object[]=[
-	{day:"Monday",key:"firstStep"},
-	{day:"Tuesday",key:"secondStep"},
-	{day:"Wednesday",key:"thirdStep"},
-	{day:"Thursday",key:"fourthStep"},
-	{day:"Friday",key:"fifthStep"},
-	{day:"Saturday",key:"sixthStep"},
-	{day:"Sunday",key:"seventhStep"}];
+	{day:"monday",key:"firstStep"},
+	{day:"tuesday",key:"secondStep"},
+	{day:"wednesday",key:"thirdStep"},
+	{day:"thursday",key:"fourthStep"},
+	{day:"friday",key:"fifthStep"},
+	{day:"saturday",key:"sixthStep"},
+	{day:"sunday",key:"seventhStep"}];
  
   exerciseMap=new Map();
   firstFormGroup: FormGroup;
