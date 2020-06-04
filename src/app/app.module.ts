@@ -13,6 +13,13 @@ import {BottomNavModule} from 'ngx-bottom-nav';
 import { StatsComponent } from './components/stats/stats.component';
 import { WeekroutineComponent } from './components/profile/weekroutine/weekroutine.component';
 import { AddsetsComponent } from './components/add/addsets/addsets.component';
+import { LineChartComponent } from './components/stats/line-chart/line-chart.component';
+import { ChartsModule } from 'ng2-charts';
+import { DoughnutChartComponent } from './components/stats/doughnut-chart/doughnut-chart.component';
+import { BarChartComponent } from './components/stats/bar-chart/bar-chart.component';
+import { PieChartComponent } from './components/stats/pie-chart/pie-chart.component';
+import { RadarChartComponent } from './components/stats/radar-chart/radar-chart.component';
+import { SelectionComponent } from './components/stats/selection/selection.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +28,13 @@ import { AddsetsComponent } from './components/add/addsets/addsets.component';
     AddComponent,
     StatsComponent,
     WeekroutineComponent,
-    AddsetsComponent
+    AddsetsComponent,
+    LineChartComponent,
+    DoughnutChartComponent,
+    BarChartComponent,
+    PieChartComponent,
+    RadarChartComponent,
+    SelectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +42,7 @@ import { AddsetsComponent } from './components/add/addsets/addsets.component';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    ChartsModule,
     BottomNavModule,
     ReactiveFormsModule
   ],
