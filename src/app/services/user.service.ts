@@ -6,6 +6,7 @@ import {STAT } from '../interfaces/stat';
 import {OneDayStats} from '../interfaces/todayStats';
 import {OVERALL} from '../interfaces/data/overall';
 import {TODAY} from '../interfaces/data/today';
+import {WEEK} from '../interfaces/data/week';
 
 @Injectable({
   providedIn: 'root'
@@ -105,9 +106,10 @@ export class UserService {
 		}
 		return 1;
 	}
+
 	getTimeSpendOnDate(stat:STAT):number{
 		let total:number=0;
-		
+		if(stat.todayStats==undefined) return 0;
 		for(let i in stat.todayStats)
 		{
 			total+=this.getTimeSpendOnDateUtil(stat.todayStats[i]);
@@ -136,6 +138,24 @@ export class UserService {
 		}
 		return todayData;
 	}
+	getWeekData():WEEK[]{
+			let overall:WEEK[]=[];
+		let total:number=0;
+		for(let i=0;i<this.user.stats.length;i++)
+			{total=0;
+				total+=this.getTimeSpendOnDate(this.user.stats[i]);
+				overall.push({
+					label:this.weeks[new Date(this.user.stats[i].date).getDay()],
+					time:total
+				})
+			}
+			
+		console.log(overall);
+
+		return overall;
+
+	}
+
 	getOverall():OVERALL[]{
 		let overall:OVERALL[]=[];
 		let total:number=0;
