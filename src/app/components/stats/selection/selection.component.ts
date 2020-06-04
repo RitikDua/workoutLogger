@@ -19,13 +19,13 @@ export class SelectionComponent implements OnInit {
 form: FormGroup;
   foods: Food[] = [
     {value: 'overall', viewValue: 'overall'},
-    {value: 'week', viewValue: 'Pizza'},
-    {value: 'today', viewValue: 'Tacos'}
+    {value: 'today', viewValue: 'today'},
+    {value: 'week', viewValue: 'week'}
   ];
-  foodControl = new FormControl(this.foods[2].value);
+  foodControl = new FormControl(this.foods[1].value);
   
   constructor(private router:Router,private route:ActivatedRoute) {
-   this.navigateTo("overall");
+   this.navigateTo("today");
       this.form = new FormGroup({
       food: this.foodControl,
    }); }

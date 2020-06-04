@@ -5,6 +5,7 @@ import {ExerciseList } from '../interfaces/exerciseList';
 import {STAT } from '../interfaces/stat';
 import {OneDayStats} from '../interfaces/todayStats';
 import {OVERALL} from '../interfaces/data/overall';
+import {TODAY} from '../interfaces/data/today';
 
 @Injectable({
   providedIn: 'root'
@@ -112,6 +113,28 @@ export class UserService {
 			total+=this.getTimeSpendOnDateUtil(stat.todayStats[i]);
 		}
 		return total;
+	}
+	getTodayDataUtil(stat:STAT):TODAY[]{
+		let total:TODAY[]=[];
+		
+		for(let i in stat.todayStats)
+		{
+			total.push({
+				exerciseName:i,time:this.getTimeSpendOnDateUtil(stat.todayStats[i])});
+		}
+		return total;
+	}
+	getTodayData():TODAY[]{
+		let todayData:TODAY[]=[];
+		let todayDate:string=(new Date()).toString().slice(0,15);
+		for(let i=0;i<this.user.stats.length;i++)
+		{
+			if(this.user.stats[i].date===todayDate)
+			{
+				return this.getTodayDataUtil(this.user.stats[i]);
+			}
+		}
+		return todayData;
 	}
 	getOverall():OVERALL[]{
 		let overall:OVERALL[]=[];
