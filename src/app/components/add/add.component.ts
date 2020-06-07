@@ -32,7 +32,6 @@ export class AddComponent implements OnInit {
        this.userService.addStatsOfOneExercise((new Date()).toString().slice(0,15),data.exercise.toLowerCase(),exercise);
      } 
      else{
-
        exercise.reps=data.reps;
        exercise.sets=data.sets;
        this.userService.addStatsOfOneExercise((new Date()).toString().slice(0,15),data.exercise.toLowerCase(),exercise);
