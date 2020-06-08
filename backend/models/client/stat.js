@@ -4,12 +4,18 @@ const mongoose = require('mongoose');
 
 
 const statSchema = new mongoose.Schema({
-  
-  date:String,
+  userId:{
+    type:String,
+  },
+  date:{
+    type:String,
+    unique:true},
   weight:Number,
   height:Number,
   todayStats:{
-          type:[{type: mongoose.Schema.Types.ObjectId, ref:'todayStat'}]
+          type:[
+                {type: mongoose.Schema.Types.ObjectId, 
+                  ref:'todayStat'}]
           ,default:null}
 });
 

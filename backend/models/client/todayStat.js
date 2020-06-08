@@ -1,6 +1,9 @@
 const mongoose=require("mongoose");
 const todaySchema = new mongoose.Schema({
- 
+ userId:{
+ 	type:String,
+ 	unique:true
+ },
   exerciseName:{
   type:String,//exercise Name
   },
