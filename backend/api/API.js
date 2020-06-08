@@ -111,8 +111,27 @@ router.post("/add/onestat",(req,res,next)=>{
 			})
 		});
 	})
-	
+	// res.send("s");
 });
+router.post("/user",(req,res,next)=>{
+	Client.findOne({userId:req.body.userId},(err,user)=>{
+		if(err) return next(err);
+		else{
+			user.populate('stats',(err,user)=>{
+				if(err) return next(err);
+				
+				console.log(user);
+				user.stats.map((s)=>{
+					s.populate('todayStats',(err,stat)=>{
+						if(err) return next(err);
+						else console.log(stat);
+					})
+					console.log(s);
+				})
 
-
+					res.send("he");
+			})
+		}	
+	})
+})
 module.exports=router;

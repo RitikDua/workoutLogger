@@ -16,7 +16,9 @@ const clientSchema = new mongoose.Schema({
   }],
   default:null
 },
-  stats:{type: [{type: mongoose.Schema.Types.ObjectId, ref:'Stat'}],default:null}
+  stats:{
+    type: [{type: mongoose.Schema.Types.ObjectId, ref:'Stat'}],default:null
+  }
 	// username:String
 });
 console.log("FInd");
