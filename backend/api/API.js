@@ -113,14 +113,29 @@ router.post("/add/onestat",(req,res,next)=>{
 	// res.send("s");
 });
 
-//get today stat
-router.get("/stats/today",(req,res,next)=>{
-				//By default, Mongoose pluralizes the model name to come up with the name of the collection
-				//as """todayStatss""" is correct
+// //get today weight height
+// router.get("/stats/today",(req,res,next)=>{
+				
+// 				Stat.findOne({date:(new Date()).toString().slice(0,15)},(err,result)=>{
+// 					if(err) return next(err);
+// 					res.json(result);
+// 				})
+// })
 
-	Stat.findOne({date:(new Date().toString().slice(0,15))}).populate("todayStatss").exec((err,sstat)=>{
-		console.log(sstat);
-	})
-	res.send("s");
+//get todaystat  
+router.get("/stats/todayStat",(req,res,next)=>{
+				
+
+				Stat.findOne({date:(new Date()).toString().slice(0,15)},(err,stat)=>{
+					if(err) return next(err);
+					TodayStat.populate(stat,{path:"todayStats"},(err,r)=>{
+						console.log(r);
+						if(err) return next(err);
+						res.json(r);
+					})
+				})
+
 })
+
+
 module.exports=router;
