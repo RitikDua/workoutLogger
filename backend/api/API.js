@@ -53,38 +53,37 @@ router.post("/profile/exerciseList",(req,res,next)=>{
 
 //get exerciseList
 router.get("/add/exerciseList",(req,res,next)=>{
-	Client.findOne({userId:req.body.userId},(err,user)=>{
+	Client.findOne({userId:"5edcd572fc3e2b2856ac3a93"},(err,user)=>{
 		if(err) return next(err);
 		return res.send(user.exerciseList);
 	})
 })
 
 
-//add stats for exercise without todayStat
+
+
 router.post("/add/stat",(req,res,next)=>{
 	const stat=new Stat();
 	stat.weight=1;
+	stat.height=1;
 	stat.userId=req.body.userId;
 	stat.date=(new Date()).toString().slice(0,15);
+	console.log(stat);
 	Client.findOne({userId:req.body.userId},(err,user)=>{
 		if(err) return next(err);
-		stat.save((err,statRecord)=>{
+		console.log(user);
+		stat.save((err,statR)=>{
 			if(err) return next(err);
-			user.stats.push(stat);
-			Stat.populate(user,{path:'stats'});
-			user.save((err,userRecord)=>{
-				if(err) return next(err);
-				res.json({
-					username:user.username,
-					userId:user.userId,
-					exerciseList:user.exerciseList
+				user.stats.push(stat);
+				Stat.populate(user,{path:"stats"});
+				user.save((err,userR)=>{
+					if(err) return next(err);
+					res.send(user);
 				})
-			})
-		});
+		})
 	})
 	// res.send("s");
-});
-
+})
 //add stat for one exercise with todayStat 
 router.post("/add/onestat",(req,res,next)=>{
 	const todayStat=new TodayStat();
@@ -113,25 +112,15 @@ router.post("/add/onestat",(req,res,next)=>{
 	})
 	// res.send("s");
 });
-router.post("/user",(req,res,next)=>{
-	Client.findOne({userId:req.body.userId},(err,user)=>{
-		if(err) return next(err);
-		else{
-			user.populate('stats',(err,user)=>{
-				if(err) return next(err);
-				
-				console.log(user);
-				user.stats.map((s)=>{
-					s.populate('todayStats',(err,stat)=>{
-						if(err) return next(err);
-						else console.log(stat);
-					})
-					console.log(s);
-				})
 
-					res.send("he");
-			})
-		}	
+//get today stat
+router.get("/stats/today",(req,res,next)=>{
+				//By default, Mongoose pluralizes the model name to come up with the name of the collection
+				//as """todayStatss""" is correct
+
+	Stat.findOne({date:(new Date().toString().slice(0,15))}).populate("todayStatss").exec((err,sstat)=>{
+		console.log(sstat);
 	})
+	res.send("s");
 })
 module.exports=router;

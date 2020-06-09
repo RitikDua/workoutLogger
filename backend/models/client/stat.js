@@ -9,7 +9,8 @@ const statSchema = new mongoose.Schema({
   },
   date:{
     type:String,
-    unique:true},
+    require:true,
+    unqiue:true},
   weight:Number,
   height:Number,
   todayStats:{
