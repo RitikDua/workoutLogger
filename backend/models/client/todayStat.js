@@ -4,6 +4,9 @@ const todaySchema = new mongoose.Schema({
  	type:String,
  	unique:true
  },
+ date:{
+   type:String,
+ },
   exerciseName:{
   type:String,//exercise Name
   },

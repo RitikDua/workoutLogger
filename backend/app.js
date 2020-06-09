@@ -22,7 +22,7 @@ require("./config");
 const login=require("./controllers/login");
 const signup=require("./controllers/signup");
 
-const api=require("./api/API");
+const api=require("./api/api");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
