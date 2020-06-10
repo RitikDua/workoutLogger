@@ -4,6 +4,8 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import {WeekroutineComponent} from './weekroutine/weekroutine.component';
 import {UserService} from '../../services/user.service';
 import {ExerciseList} from '../../interfaces/exerciseList';
+import {User} from '../../login/classes/user';
+import {AuthenticationService} from '../../login/services/authentication.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +17,9 @@ import {ExerciseList} from '../../interfaces/exerciseList';
 })
 export class ProfileComponent implements OnInit {
   //for testing
-	username:String="Ritik";
+
+
+	username:String;
 	weight:Number;
 	height:Number;
 	
@@ -39,7 +43,9 @@ export class ProfileComponent implements OnInit {
 
  isLinear = false;
 
-  constructor(private userService:UserService,private _formBuilder: FormBuilder) {}
+  constructor(private authService:AuthenticationService,private userService:UserService,private _formBuilder: FormBuilder) {
+    this.username=this.authService.getCurrentUser().name;
+  }
 
   changeFromChild(data){
   	console.log(data);

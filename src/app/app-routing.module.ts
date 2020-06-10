@@ -8,8 +8,11 @@ import { DoughnutChartComponent } from './components/stats/doughnut-chart/doughn
 import { BarChartComponent } from './components/stats/bar-chart/bar-chart.component';
 import { PieChartComponent } from './components/stats/pie-chart/pie-chart.component';
 import { RadarChartComponent } from './components/stats/radar-chart/radar-chart.component';
+import {RegisterComponent} from './login/components/register/register.component';
+import {LoginComponent} from './login/components/login/login.component';
+
 const routes: Routes = [
-	{path:"",redirectTo:"/add",pathMatch:'full'},
+	// {path:"",redirectTo:"/add",pathMatch:'full'},
 	{path:'stats',component:StatsComponent,
 	children:[
 	{path:'overall',component:LineChartComponent},
@@ -19,6 +22,8 @@ const routes: Routes = [
 },
 	{path:'profile',component:ProfileComponent},
 	{path:'add',component:AddComponent},	
+	{path:'register',component:RegisterComponent},
+	{path:'login',component:LoginComponent}
 ];
 
 @NgModule({

@@ -7,18 +7,21 @@ import {OneDayStats} from '../interfaces/todayStats';
 import {OVERALL} from '../interfaces/data/overall';
 import {TODAY} from '../interfaces/data/today';
 import {WEEK} from '../interfaces/data/week';
+import {AuthResponse} from '../login/classes/authresponse';
+import {User} from '../login/classes/user';
+import  {HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 	user:USER;
-
+	apiBaseUrl="http://localhost:3000";
 	exercieseWithTime:string[]=["running","jogging","walking","yoga"];
 	weeks:string[]=[
 	"sunday","monday","tuesday","wednesday","thursday","friday","saturday"
 	];
-	constructor() { 
+	constructor(private http:HttpClient) { 
 		this.user={username:"Ritik",
 					exercisesList:[],
 					stats:[]
@@ -171,4 +174,18 @@ export class UserService {
 
 		return overall;
 	}
-}
+
+	public login(user:User):Promise<AuthResponse>{
+		return this.makeAuthApiCall("login",user);
+	}
+
+	public register(user:User):Promise<AuthResponse>{
+		return this.makeAuthApiCall("signup",user);
+	}
+
+	private makeAuthApiCall(urlPath:string,user:User):Promise<AuthResponse>{
+		const url:string=`${this.apiBaseUrl}/${urlPath}`;
+		return this.http.post(url,user).toPromise().then((res)=>res as AuthResponse).catch((err)=> err);
+	}
+	
+}	
