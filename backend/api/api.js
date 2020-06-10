@@ -119,5 +119,25 @@ router.post("/add/stat/todaystat",(req,res,next)=>{
 })
 
 
+//get today data
+router.get("/stats/ondate",(req,res,next)=>{
+	Stat.findOne({date:(new Date(""+req.body.date)).toString().slice(0,15),userId:req.body.userId},(err,stat)=>{
+		if(err) return err;
+		TodayStat.populate(stat,{path:"todayStats"},(err,result)=>{
+			if(err) return err;
+			res.json(result);
+		})
+	}).catch((err)=> next(err));
+});
 
+//get overall data
+router.get("/stats/overall",(req,res,next)=>{
+	Client.findOne({userId:req.body.userId},(err,user)=>{
+		if(err) return err;
+		Stat.populate(user,{path:"stats"},(err,stat)=> {
+			if(err) return err;
+			res.json(stat);
+		})
+	}).catch((err)=> next(err));
+})
 module.exports=router;
