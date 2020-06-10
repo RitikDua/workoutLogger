@@ -20,7 +20,9 @@ import { BarChartComponent } from './components/stats/bar-chart/bar-chart.compon
 import { PieChartComponent } from './components/stats/pie-chart/pie-chart.component';
 import { RadarChartComponent } from './components/stats/radar-chart/radar-chart.component';
 import { SelectionComponent } from './components/stats/selection/selection.component';
-
+import { RegisterComponent } from './login/components/register/register.component';
+import {HttpClientModule} from '@angular/common/http';
+import { LoginComponent } from './login/components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,8 +37,10 @@ import { SelectionComponent } from './components/stats/selection/selection.compo
     PieChartComponent,
     RadarChartComponent,
     SelectionComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
-  imports: [
+  imports: [HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
