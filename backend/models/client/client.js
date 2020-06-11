@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 // const {Stat} =require("./stat");
 const clientSchema = new mongoose.Schema({
   userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      // type: mongoose.Schema.Types.ObjectId,
+      // ref: "User",
+      type:String,
+      unqiue:true,
       required: true
     },
   username: {
@@ -21,5 +23,5 @@ const clientSchema = new mongoose.Schema({
   }
 	// username:String
 });
-console.log("FInd");
+// console.log("FInd");
 module.exports=mongoose.model('Client', clientSchema);

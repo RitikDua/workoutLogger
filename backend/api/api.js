@@ -3,7 +3,9 @@ const mongoose=require("mongoose");
 const Client=require("../models/client/client");
 const Stat=require("../models/client/stat");
 const TodayStat=require("../models/client/todayStat");
-
+const USERid="";
+require("../models/User");
+const User=mongoose.model("User");
 router.post("/new",(req,res)=>{
 	let client=new Client({userId:req.body.userId,username:req.body.username});
 	Client.findOne({username:req.body.userId},(err,user)=>{
@@ -17,7 +19,7 @@ router.post("/new",(req,res)=>{
 			client.save((err,userHere)=>{
 				if(err) return err;
 				res.json(userHere)
-			}).catch((err)=>next(err))
+			})
 		}
 
 	}).catch((err)=>next(err))	
@@ -140,4 +142,23 @@ router.get("/stats/overall",(req,res,next)=>{
 		})
 	}).catch((err)=> next(err));
 })
+
+//set userId for client
+router.post("/userid",(req,res,next)=>{
+	User.findOne({username:req.body.username,email:req.body.email},(err,user)=>{
+		if(err) return err;
+		USERid=user._id;
+		res.send(user._Id);
+		res.status=200;
+
+	}).catch((err)=>next(err));
+});
+
+
+
+//get userId for client
+router.get("/userid",(req,res,next)=>{
+	res.send(USERid);
+});
+
 module.exports=router;
