@@ -9,21 +9,23 @@ const signup=(req,res)=>{
 	let proceed=true;
 	const user=new User();
 	user.name=req.body.name;
+
 	user.email=req.body.email;
-	user.setPassword(req.body.password);
+	
+				user.setPassword(req.body.password);
 	let p=new Promise((resolve,reject)=>{ 
 		User.findOne({name:user.name,email:user.email},(err,usr)=>{
-			if(err){ console.log(err);proceed=false; }
+			if(err){ console.log("Errror"+err); }
 			console.log(usr);
 			if(usr)
 			{	
 				res.status(409).json({"message":"user with this username or email already present"});
 			}
-	// console.log("s");
+			else{
 				user.save((err)=>{
 				if(err){
 					console.log(err);
-					res.status(404).json(err);
+					res.json(err);
 				}
 				else{
 					const token=user.generateJwt();
@@ -33,12 +35,12 @@ const signup=(req,res)=>{
 					})
 					res.status(200).json({token});
 				}
-			})
+			})}
 		
-		})
+		});//.catch((err)=>next(err));
 	
-	});
-	
+	}).catch((err)=>next(err));;
+
 	}
 
 module.exports=signup;
