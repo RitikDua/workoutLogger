@@ -10,14 +10,13 @@ import {EXERCISE} from '../../interfaces/exercise';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-
+  username:string;
   weeks:string[]=[
   "sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
   	exercisesList:ExerciseList;	
     
 	constructor(private userService:UserService) { 
-      this.exercisesList=this.userService.getExercisesList();
-    console.log(this.exercisesList);
+    this.exercisesList=this.userService.getExercisesList();
   }
   	ngOnInit(): void {
   	}

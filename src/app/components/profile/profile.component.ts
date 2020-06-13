@@ -5,7 +5,6 @@ import {WeekroutineComponent} from './weekroutine/weekroutine.component';
 import {UserService} from '../../services/user.service';
 import {ExerciseList} from '../../interfaces/exerciseList';
 import {User} from '../../login/classes/user';
-import {AuthenticationService} from '../../login/services/authentication.service';
 
 @Component({
   selector: 'app-profile',
@@ -43,8 +42,10 @@ export class ProfileComponent implements OnInit {
 
  isLinear = false;
 
-  constructor(private authService:AuthenticationService,private userService:UserService,private _formBuilder: FormBuilder) {
-    this.username=this.authService.getCurrentUser().name;
+  constructor(private userService:UserService,private _formBuilder: FormBuilder) {
+     
+    this.username=this.userService.getCurrentUser().name;
+     this.userService.createUser();
   }
 
   changeFromChild(data){

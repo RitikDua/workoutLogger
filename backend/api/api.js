@@ -27,18 +27,34 @@ router.post("/new",(req,res)=>{
 
 
 //update exerciseList
-router.post("/add/exerciseList",(req,res,next)=>{
-	Client.findOneAndUpdate({userId:req.body.userId},{exerciseList:req.body.exerciseList},{useFindAndModify:false},(err,result)=>{
+router.post("/add/exercisesList",(req,res,next)=>{
+	console.log(req.body.exercisesList);
+	Client.findOneAndUpdate({userId:req.body.userId},{exercisesList:req.body.exercisesList},{useFindAndModify:false},(err,result)=>{
+		console.log(result);
 		if(err) return err;
 		else res.json(result);
 	}).catch((err)=>next(err))
 })
 
 //get exerciseList
-router.get("/exerciseList",(req,res,next)=>{
+router.post("/exercisesList",(req,res,next)=>{
+	console.log("Hello"+req.body.userId);
 	Client.findOne({userId:req.body.userId},(err,user)=>{
+		console.log(user);
 		if(err) return new Error("Client Not Found");
-		res.json(user.exerciseList);
+		if((user==null)) res.send(null);
+		else
+		{
+			let arr=[];
+			for(let i=0;i<user.exercisesList;i++)
+			{
+				arr.push({
+						"day":user.exercisesList[i].day,
+						"exercises":user.exercisesList[i].exercises
+				})
+			}
+			res.json(arr);
+		}
 
 	}).catch((err)=>next(err))
 })
@@ -48,15 +64,19 @@ router.post("/add/stat",(req,res,next)=>{
 	let stat=new Stat({
 			date:(new Date()).toString().slice(0,15),
 			userId:req.body.userId,
+			weight:req.body.weight,
+			height:req.body.height,
 	});
 	Client.findOne({userId:req.body.userId},(err,user)=>{
 		if(err) return new Error("User not found");
 		
-		Stat.findOne({date:stat.date},(err,statH)=>{
+		Stat.findOne({date:stat.date,userId:req.body.userId},(err,statH)=>{
 			if(err) return err;
 			console.log(statH);
-			if(statH){res.status=409;//status code for conflict
+			if(statH){//res.status=409;//status code for conflict
+				console.log("Already");
 				res.send("stat is already created for today \n use todaystat");
+			
 			}
 
 			else{
@@ -69,7 +89,7 @@ router.post("/add/stat",(req,res,next)=>{
 							if(err) return err;
 							res.json(result)
 						})
-					}).catch((err)=>next(err))
+					});
 				})	
 			}
 		}).catch((err)=>next(err))
@@ -85,24 +105,24 @@ router.post("/add/stat/todaystat",(req,res,next)=>{
 		exercise:req.body.exercise,
 		date:(new Date()).toString().slice(0,15)
 	});
-
+console.log(todayStat);
 	Stat.findOne({date:todayStat.date,userId:todayStat.userId},(err,stat)=>{
 		if(err) return err;
 		TodayStat.findOne({date:todayStat.date,userId:todayStat.userId,exerciseName:todayStat.exerciseName},(err,todayF)=>{
-			console.log(todayStat)
+			console.log(err)
 			if(err) return err;
-			if(todayF){
-				if(check(todayF.exercise,todayStat))
-				{
-					//logic for duplicate entry
-				}
+			if(todayF!==null){
+				
 				TodayStat.findOneAndUpdate({date:todayStat.date,userId:todayStat.userId,exerciseName:todayStat.exerciseName},{exercise:todayStat.exercise},{useFindAndModify:false},(err,result)=>{
 					if(err) return err;
 					res.json(result);
 				}).catch((err)=> next(err));
 			}
 			else{
+				console.log("ss");
 				todayStat.save((err,todayR)=>{
+					console.log(stat);
+					
 					if(err) return err;
 					stat.todayStats.push(todayStat);
 					TodayStat.populate(stat,{path:"todayStats"},(err,statR)=>{
@@ -157,8 +177,23 @@ router.post("/userid",(req,res,next)=>{
 
 
 //get userId for client
-router.get("/userid",(req,res,next)=>{
-	res.send(USERid);
+router.post("/user",(req,res,next)=>{
+	console.log(req.body);
+		User.findOne({name:req.body.name,email:req.body.email},(err,usr)=>{
+
+			if(err) return err;
+			// usr._id
+			if(!(usr))
+				res.send(null);
+			else
+			Client.findOne({userId:usr._id,username:req.body.name},(err,client)=>{
+								console.log(client);
+					if(err) return err;
+					if(client) res.json(client);
+					else res.status(404).json({"error":"client not found"});
+			}).catch((err)=>next(err));
+		}).catch((err)=>next(err));
 });
+
 
 module.exports=router;

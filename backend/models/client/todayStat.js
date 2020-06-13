@@ -1,8 +1,7 @@
 const mongoose=require("mongoose");
 const todaySchema = new mongoose.Schema({
  userId:{
- 	type:String,
- 	unique:true
+ 	type:String
  },
  date:{
    type:String,

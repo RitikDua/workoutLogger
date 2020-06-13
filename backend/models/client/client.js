@@ -12,7 +12,7 @@ const clientSchema = new mongoose.Schema({
     type: String,
     required:true
   },
-  exerciseList:{ type:[{
+  exercisesList:{ type:[{
   	day:String,//Day of the week
   	exercises:[String]
   }],

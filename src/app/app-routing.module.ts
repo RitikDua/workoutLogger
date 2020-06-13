@@ -12,7 +12,7 @@ import {RegisterComponent} from './login/components/register/register.component'
 import {LoginComponent} from './login/components/login/login.component';
 
 const routes: Routes = [
-	// {path:"",redirectTo:"/add",pathMatch:'full'},
+	{path:"",redirectTo:"/profile",pathMatch:'full'},
 	{path:'stats',component:StatsComponent,
 	children:[
 	{path:'overall',component:LineChartComponent},
