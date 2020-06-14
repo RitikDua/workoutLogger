@@ -21,7 +21,7 @@ form: FormGroup;
   foods: Food[] = [
     {value: 'overall', viewValue: 'overall'},
     {value: 'today', viewValue: 'today'},
-    {value: 'week', viewValue: 'week'}
+ //   {value: 'week', viewValue: 'week'}
   ];
   foodControl = new FormControl(this.foods[1].value);
   

@@ -1,7 +1,10 @@
+
+<br />
+<br />
+<div class="container">
 <form [formGroup]="form">
-  <h4>mat-select</h4>
   <mat-form-field>
-    <mat-label>Favorite Food</mat-label>
+    <mat-label>View</mat-label>
     <mat-select [formControl]="foodControl" name="food" (selectionChange)="navigateTo($event.value)" >
       <mat-option>None</mat-option>
       <mat-option *ngFor="let food of foods" [value]="food.value">
@@ -9,5 +12,5 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <p>{{foodControl.value}}</p>
 </form>
+</div>

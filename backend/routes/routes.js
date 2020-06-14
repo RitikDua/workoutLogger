@@ -17,4 +17,4 @@ const auth=(req,res,next)=>{
 
 // })
 
-module.exports=router;
+module.exports=auth;

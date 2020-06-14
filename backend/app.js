@@ -8,7 +8,7 @@ const crypto=require("crypto");
 const app=express();
 const cors = require("cors");
 // const logger=require("logger");
-const apiRouter = require('./routes/routes');
+const auth = require('./routes/routes');
 const bodyParser = require('body-parser');
 
 const passport=require("passport");

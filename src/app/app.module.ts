@@ -21,9 +21,12 @@ import { PieChartComponent } from './components/stats/pie-chart/pie-chart.compon
 import { RadarChartComponent } from './components/stats/radar-chart/radar-chart.component';
 import { SelectionComponent } from './components/stats/selection/selection.component';
 import { RegisterComponent } from './login/components/register/register.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { LoginComponent } from './login/components/login/login.component';
 import {AuthGuard} from './login/guard/auth.guard';
+import {TokenInterceptorService} from './login/services/token-interceptor.service';
+
+import { ServiceWorkerModule } from '@angular/service-worker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,9 +52,14 @@ import {AuthGuard} from './login/guard/auth.guard';
     FormsModule,
     ChartsModule,
     BottomNavModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+   ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,7 +11,7 @@ import {UserService} from '../../services/user.service';
 export class AuthenticationService {
 
   constructor(@Inject(BROWSER_STORAGE) private storage:Storage,private userService:UserService) { }
-  private getToken():string{
+  public getToken():string{
   	return this.storage.getItem("workoutLogger");
   }
   private saveToken(token:string):void{
