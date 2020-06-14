@@ -3,9 +3,11 @@ import {BROWSER_STORAGE} from '../storage';
 import {User} from '../classes/user';
 import {AuthResponse} from '../classes/authresponse';
 import {UserService} from '../../services/user.service';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthenticationService {
 
   constructor(@Inject(BROWSER_STORAGE) private storage:Storage,private userService:UserService) { }

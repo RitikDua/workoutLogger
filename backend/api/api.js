@@ -142,25 +142,51 @@ console.log(todayStat);
 
 
 //get today data
-router.get("/stats/ondate",(req,res,next)=>{
+router.post("/stats/ondate",(req,res,next)=>{
 	Stat.findOne({date:(new Date(""+req.body.date)).toString().slice(0,15),userId:req.body.userId},(err,stat)=>{
 		if(err) return err;
 		TodayStat.populate(stat,{path:"todayStats"},(err,result)=>{
 			if(err) return err;
+			if(result)
 			res.json(result);
+			else res.send(null);
 		})
 	}).catch((err)=> next(err));
 });
 
 //get overall data
-router.get("/stats/overall",(req,res,next)=>{
-	Client.findOne({userId:req.body.userId},(err,user)=>{
-		if(err) return err;
-		Stat.populate(user,{path:"stats"},(err,stat)=> {
-			if(err) return err;
-			res.json(stat);
-		})
-	}).catch((err)=> next(err));
+// router.get("/stats/overall",(req,res,next)=>{
+// 	Client.findOne({userId:req.body.userId},(err,user)=>{
+// 		if(err) return err;
+// 		Stat.populate(user,{path:"stats"},(err,stat)=> {
+// 			if(err) return err;
+// 			let arr=[],i=0;
+// 			// res.json(stat);
+// 			for( i=0;i<stat.stats.length;i++)
+// 			{let s=stat.stats[i];
+// 				TodayStat.populate(s,{path:"todayStats"},(err,result)=>{
+// 					// console.log(result);
+// 					if(err) return err;
+// 					if(result)
+// 						arr.push(result)
+// 					console.log(arr);
+// 					// else res.send(null);
+// 				})
+// 			}
+// 			if(i===stat.stats.length)
+// 			{console.log(arr);
+// 				res.send(arr);}
+// 		})
+// 	}).catch((err)=> next(err));
+// })
+
+router.post("/stats/overall",(req,res,next)=>{
+	TodayStat.find({userId:req.body.userId},(err,result)=>{
+		console.log(result);
+		console.log(err);
+		if(err) return (err);
+		res.send(result);
+	}).catch((err)=>next(err))
 })
 
 //set userId for client

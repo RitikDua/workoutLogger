@@ -63,27 +63,38 @@ public lineChartOptions: (ChartOptions & { annotation: any }) = {
   // public lineChartType = 'line';
   public lineChartPlugins = [pluginAnnotations];
   constructor(private userService:UserService){
-  let overall:OVERALL[]=this.userService.getOverall();
+    this.userService.getOverallDataPromise()
+      .then((val)=>{
+        console.log(val);
+        if(val!==null)
+        this.userService.saveOverallData(val)
+      }).then(()=>{
+        let overall:OVERALL[]=this.userService.getOverallData();
+     let timeArr:number[]=[];
+     for(let i in overall)
+     {
+       this.lineChartLabels.push(i);
+       this.lineChartData.push(overall[i]);
+     }
+        
+      })
+  }
+  
+  
+  ngOnInit(){
+this.userService.getOverallDataPromise()
+      .then((val)=>{
+        console.log(val);
+        if(val!==null)
+        this.userService.saveOverallData(val)
+      }).then(()=>{
+        let overall:OVERALL[]=this.userService.getOverallData();
      let timeArr:number[]=[];
      for(let i=0;i<overall.length;i++)
      {
        this.lineChartLabels.push(overall[i].label);
        this.lineChartData.push(overall[i].time);
      }
-  }
-  
-  
-  ngOnInit(){
-    let overall:OVERALL[]=this.userService.getOverall();
-     
-       let timeArr:number[]=[];
-     for(let i=0;i<overall.length;i++)
-     {
-       this.lineChartLabels.push(overall[i].label);
-      timeArr.push(overall[i].time);
-     }
-     this.lineChartData.push({data:timeArr,label:'Overall'});
-     console.log(overall);
-  
-  }
+        
+      })  }
 }

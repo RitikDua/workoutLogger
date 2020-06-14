@@ -1,4 +1,5 @@
 export interface OVERALL{
-	label:string;
-	time:number;
+	[key:string]:number;
 }
+//key is label as date
+//value is time 

@@ -22,6 +22,8 @@ export class UserService {
 	exercisesList:ExerciseList[]=[];
 	statForToday:STAT;
 	userId:string;
+	todayData:TODAY[]=[];
+	overallData:OVERALL[]=[];
 	todayStats:OneDayStats[]=[];
 	username:string;
 	apiBaseUrl="http://localhost:3000";
@@ -56,6 +58,23 @@ export class UserService {
 	}
 	saveStat(stat:any){
 
+	}
+	saveOverallData(val:any):void{
+		this.overallData=[];
+		for(let i=0;i<val.length;i++)
+		{let temp:EXERCISE={
+			sets:val[i].exercise.sets,
+			mins:val[i].exercise.mins,
+			hrs:val[i].exercise.hrs,
+			reps:val[i].exercise.reps,
+			}
+		console.log(val[i]);
+			if(this.overallData[""+val[i].date])
+				this.overallData[""+val[i].date]+=(this.getTimeSpendOnDateUtil(temp));
+			else 
+				this.overallData[""+val[i].date]=this.getTimeSpendOnDateUtil(temp);
+		// }
+		}
 	}
 	createEmptyStatForToday():void{
 		this.http.post<any>(`${this.apiBaseUrl}/api/add/stat`,{"userId":this.userId,"weight":0,"height":0})
@@ -124,8 +143,10 @@ export class UserService {
 				"exercise":reqExercise}).subscribe(
 				(val)=>console.log(),
 				(res)=>console.log(res),
-				()=>console.log("Todaystat is added")
-				)
+				()=>{
+					console.log("Todaystat is added")
+					this.createTodayData()
+				})
 		this.printData();
 	}
 	
@@ -195,17 +216,58 @@ export class UserService {
 		}
 		return total;
 	}
-	getTodayData():TODAY[]{
-		let todayData:TODAY[]=[];
-		let todayDate:string=(new Date()).toString().slice(0,15);
-		for(let i=0;i<this.user.stats.length;i++)
-		{
-			if(this.user.stats[i].date===todayDate)
-			{
-				return this.getTodayDataUtil(this.user.stats[i]);
+	saveTodayData(val:any):void{
+		// console.log(val[0]);
+
+		this.todayData=[];
+		for(let i=0;i<val.length;i++)
+		{let temp:EXERCISE={
+			sets:val[i].exercise.sets,
+			mins:val[i].exercise.mins,
+			hrs:val[i].exercise.hrs,
+			reps:val[i].exercise.reps,
 			}
+			this.todayData.push({
+				exerciseName:val[i].exerciseName,
+				time:this.getTimeSpendOnDateUtil(temp)
+			})
 		}
-		return todayData;
+		
+	}
+	createTodayData(){
+		let todayDate:string=(new Date()).toString().slice(0,15);
+		this.http.post<any>(`${this.apiBaseUrl}/api/stats/ondate`,
+					{"date":todayDate,"userId":this.userId})
+					.subscribe(
+						(val)=>
+						{	console.log(val);
+							if(val!==null)
+							this.saveTodayData(val.todayStats);
+						},(res)=>console.log(res),
+						()=>console.log("Today stat its completed")
+						)		
+
+	}
+	getTodayData():TODAY[]{
+		return this.todayData;
+	}
+
+	getOverallData():OVERALL[]{
+		return this.overallData;
+	}
+	async getTodayDataPromise(){
+		let todayDate:string=(new Date()).toString().slice(0,15);
+		
+		const res=	await this.http.post<any>(`${this.apiBaseUrl}/api/stats/ondate`,
+					{"date":todayDate,"userId":this.userId}).toPromise()
+		return res;
+	}
+	async getOverallDataPromise(){
+		let todayDate:string=(new Date()).toString().slice(0,15);
+		
+		const res=	await this.http.post<any>(`${this.apiBaseUrl}/api/stats/overall`,
+					{"userId":this.userId}).toPromise()
+		return res;
 	}
 	getWeekData():WEEK[]{
 			let overall:WEEK[]=[];
@@ -225,8 +287,8 @@ export class UserService {
 
 	}
 
-	getOverall():OVERALL[]{
-		let overall:OVERALL[]=[];
+	getOverall(){
+		let overall=[];
 		let total:number=0;
 		for(let i=0;i<this.user.stats.length;i++)
 			{total=0;

@@ -5,6 +5,7 @@ import {WeekroutineComponent} from './weekroutine/weekroutine.component';
 import {UserService} from '../../services/user.service';
 import {ExerciseList} from '../../interfaces/exerciseList';
 import {User} from '../../login/classes/user';
+import  {Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,10 +16,7 @@ import {User} from '../../login/classes/user';
   }]
 })
 export class ProfileComponent implements OnInit {
-  //for testing
-
-
-	username:String;
+  username:String;
 	weight:Number;
 	height:Number;
 	
@@ -40,12 +38,12 @@ export class ProfileComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
- isLinear = false;
+  isLinear = false;
 
-  constructor(private userService:UserService,private _formBuilder: FormBuilder) {
+  constructor(private router:Router,private userService:UserService,private _formBuilder: FormBuilder) {
      
     this.username=this.userService.getCurrentUser().name;
-     this.userService.createUser();
+    this.userService.createUser();
   }
 
   changeFromChild(data){
@@ -59,6 +57,12 @@ export class ProfileComponent implements OnInit {
 
     this.userService.addExercises(data.day.toLowerCase(),x);
   console.log(this.exerciseMap);
+  }
+  
+  logout(){
+
+    let start=async()=>{this.userService.logout()}
+    start().then(()=>this.router.navigateByUrl("/login"));
   }
 
   ngOnInit() {
