@@ -23,6 +23,7 @@ import { SelectionComponent } from './components/stats/selection/selection.compo
 import { RegisterComponent } from './login/components/register/register.component';
 import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './login/components/login/login.component';
+import {AuthGuard} from './login/guard/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,7 @@ import { LoginComponent } from './login/components/login/login.component';
     BottomNavModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

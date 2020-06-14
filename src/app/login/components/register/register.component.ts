@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   }
   private doRegister():void{
   	this.authenticationService.register(this.credentials)
-  		.then(()=> this.router.navigateByUrl("/"))
+  		.then(()=> this.router.navigateByUrl("/profile"))
   		.catch((msg)=>this.formError=msg);
   }
 }

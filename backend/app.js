@@ -42,7 +42,7 @@ const connect=mongoose.connect("mongodb://localhost:27017/workoutLogger",{useNew
 
 app.post("/signup",signup);
 app.post("/login",login)
-app.use("/api",api);
+app.use("/api",auth,api);
 app.use((err,req,res,next)=>{
 	if(err.name==="UnauthorizedError"){
 		res.status(401).json({"message":err.name+": "+err.message});

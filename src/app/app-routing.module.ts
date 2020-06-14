@@ -10,20 +10,26 @@ import { PieChartComponent } from './components/stats/pie-chart/pie-chart.compon
 import { RadarChartComponent } from './components/stats/radar-chart/radar-chart.component';
 import {RegisterComponent} from './login/components/register/register.component';
 import {LoginComponent} from './login/components/login/login.component';
-
+import {AuthGuard} from './login/guard/auth.guard';
 const routes: Routes = [
-	{path:"",redirectTo:"/profile",pathMatch:'full'},
+	{path:"",redirectTo:"/login",pathMatch:'full'},
 	{path:'stats',component:StatsComponent,
+	canActivate:[AuthGuard],
 	children:[
-	{path:'overall',component:LineChartComponent},
-	{path:'week',component:BarChartComponent},
-	{path:'today',component:PieChartComponent},
+	{path:'overall',component:LineChartComponent,
+	canActivate:[AuthGuard]},
+	{path:'week',component:BarChartComponent,
+	canActivate:[AuthGuard]},
+	{path:'today',component:PieChartComponent,
+	canActivate:[AuthGuard]},
 	]
 },
-	{path:'profile',component:ProfileComponent},
-	{path:'add',component:AddComponent},	
+	{path:'profile',component:ProfileComponent,
+	canActivate:[AuthGuard]},
+	{path:'add',component:AddComponent,
+	canActivate:[AuthGuard]},	
 	{path:'register',component:RegisterComponent},
-	{path:'login',component:LoginComponent}
+	{path:'login',component:LoginComponent,}
 ];
 
 @NgModule({

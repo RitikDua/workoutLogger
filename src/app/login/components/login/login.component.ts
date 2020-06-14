@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
   private doLogin():void{
   	this.authenticationService.login(this.credentials)
-  		.then(()=> this.router.navigateByUrl('/'))
+  		.then(()=> this.router.navigateByUrl('/profile'))
   		.catch((msg)=>{
   			this.formError=msg
   		});
