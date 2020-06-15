@@ -18,6 +18,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  errorMsg():boolean{
+    console.log(this.formError);
+    if(this.formError.length !== 0) return true;
+    else return false;
+  }
   public onRegisterSubmit():void{
   	this.formError="";
   	if(!this.credentials.name||!this.credentials.email||!this.credentials.password)

@@ -18,6 +18,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  errorMsg():boolean{
+    if(this.formError.length !== 0) return true;
+    else return false;
+  }
   public onLoginSubmit():void{
   	this.formError="";
   	if(!this.credentials.email||!this.credentials.password)
