@@ -16,14 +16,14 @@ export class PieChartComponent implements OnInit {
   public pieChartType = 'pie';
  public pieChartColors = [
     {
-      backgroundColor:["#003f5c",
-                      "#2f4b7c",
-                      "#665191",
-                      "#a05195",
-                      "#d45087",
-                      "#f95d6a",
-                      "#ff7c43",
-                      "#ffa600"]
+      backgroundColor:[ '#ffa600',
+                        '#2f4b7c',
+                        '#ff7c43',
+                        '#a05195',
+                        '#f95d6a',
+                        '#d45087',
+                        '#665191',
+                        '#003f5c' ]
     },
   ];
 
