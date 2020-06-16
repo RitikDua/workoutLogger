@@ -1,19 +1,26 @@
 # WorkoutLogger
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
+A progressive web app to mainitain of  workout plan. It also show your stats of exercises done so far.
 
-## Development server
+## Description
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+It is a basic application of MEAN stack. In this project user can sign up or login to application. This application further contains some features like storing of user week plan  and also its shows graph according to user choice.In this project rest api is done with nodejs , for authentication JWT technique is used  and front end is provided with the Angular 9.
 
-## Code scaffolding
+## Requirements
+- Nodejs v12.18.0
+- npm v6.14.5
+- Angular v9
+- MongoDB
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
+## How To Start
+1. Open terminal and change directory to /backend (i.e. run cd /backend). 
+2. Run npm install 
+3  Run npm start
+4. Open another terminal and change directory to parent directory of this repository.
+5. Run again npm install
+6. Run again npm start
+7. Navigate to http://localhost:4200/ .
+ 
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
