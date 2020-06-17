@@ -14,6 +14,8 @@ import { Inject} from '@angular/core';
 import {BROWSER_STORAGE} from '../login/storage';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { Router} from '@angular/router';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,8 +33,14 @@ export class UserService {
 	weeks:string[]=[
 	"sunday","monday","tuesday","wednesday","thursday","friday","saturday"
 	];
-	constructor(@Inject(BROWSER_STORAGE) private storage:Storage,private http:HttpClient) { 
-		
+	constructor(@Inject(BROWSER_STORAGE) private storage:Storage,private http:HttpClient,private router:Router) { 
+		if(this.isLoggedIn())
+		{
+			this.router.navigateByUrl("/profile");
+		}
+		else{
+			this.router.navigateByUrl("/login");
+		}
 		this.printData();
 	}
 	createUser():void{
@@ -187,7 +195,7 @@ export class UserService {
 	//returns time of particular exercise used
 	getTimeSpendOnDateUtil(val:EXERCISE):number{
 		
-		if(val.hrs==null)
+		if((val.hrs==null)||(val.hrs===0 &&val.mins===0))
 		{
 			return val.sets*val.reps;
 		}	
