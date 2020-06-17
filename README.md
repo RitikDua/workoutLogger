@@ -4,7 +4,7 @@ A progressive web app to mainitain your daily workout . It also show your stats 
 
 ## Description
 
-It is a basic application of MEAN stack. In this project user can sign up or login to application. This application further contains some features like storing of user week plan  and also its shows graph according to user choice.In this project rest api is done with nodejs , for authentication JWT technique is used  and front end is provided with the Angular 9.
+It is a basic application of MEAN stack. In this project user can sign up or login to application. This application further contains some features like storing of user week plan  and also its shows graph according to user choice.In this project rest api is done with nodejs , for authentication JWT technique is used , database is maintained via MongoDB and front end is provided with the Angular 9.
 
 ## Requirements
 - Nodejs v12.18.0
