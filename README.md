@@ -1,6 +1,6 @@
 # WorkoutLogger
 
-A progressive web app to mainitain of  workout plan. It also show your stats of exercises done so far.
+A progressive web app to mainitain your daily workout . It also show your stats of exercises done so far.
 
 ## Description
 
