@@ -14,8 +14,8 @@ It is a basic application of MEAN stack. In this project user can sign up or log
 
 ## How To Start
 1. Open terminal and change directory to /backend (i.e. run cd /backend). 
-2. Run npm install 
-3  Run npm start
+2. Run npm install.
+3  Run npm start.
 4. Open another terminal and change directory to parent directory of this repository.
 5. Run again npm install
 6. Run again npm start
