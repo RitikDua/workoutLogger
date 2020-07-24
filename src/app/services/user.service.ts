@@ -10,6 +10,10 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Router} from '@angular/router';
 import {ExerciseList } from '../interfaces/exerciseList';
+import {STAT } from '../interfaces/stat';
+import {OneDayStats} from '../interfaces/todayStats';
+import {TODAY} from '../interfaces/data/today';
+import {EXERCISE} from '../interfaces/exercise';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +26,10 @@ export class UserService {
   ];
 	username:string;
 	apiBaseUrl="http://localhost:3000";
-	
+	statForToday:STAT;
+  todayData:TODAY[]=[];
+  todayStats:OneDayStats[]=[];
+
 	constructor(@Inject(BROWSER_STORAGE) private storage:Storage,private http:HttpClient,private router:Router) { 
 		if(this.isLoggedIn())
 		{
@@ -60,7 +67,7 @@ export class UserService {
             this.username=val.username;
             this.userId=val.userId;
             this.saveExercisesList(val.exercisesList);
-            // this.createEmptyStatForToday();
+            this.createEmptyStatForToday();
             console.log(this.username+" "+this.userId)
             console.log(this.exercisesList);
           }
@@ -80,10 +87,112 @@ export class UserService {
         }
     }
 
+  addStatsOfOneExercise(date:string,exerciseName:string,exercise:EXERCISE):void{
+  console.log(exercise);
+    let reqExercise={
+      "sets":exercise.sets,
+      "reps":exercise.reps,
+      "hrs":exercise.hrs,
+      "mins":exercise.mins,  
+    }
+
+    this.todayStats[exerciseName]=exercise;
+    // this.statForToday.todayStats=this.todayStats;
+    // console.log(reqExercise);
+    this.http.post<any>(`${this.apiBaseUrl}/api/add/stat/todaystat`,
+        {"userId":this.userId,
+        "exerciseName":exerciseName,
+        "exercise":reqExercise}).subscribe(
+        (val)=>console.log(val),
+        (res)=>console.log(res),
+        ()=>{
+          console.log("Todaystat is added")
+          
+          // this.createTodayData()
+        })
+
+  }
+  createTodayData(){
+    let todayDate:string=(new Date()).toString().slice(0,15);
+    this.http.post<any>(`${this.apiBaseUrl}/api/stats/ondate`,
+          {"date":todayDate,"userId":this.userId})
+          .subscribe(
+            (val)=>
+            {  console.log(val);
+              if(val!==null)
+              this.saveTodayData(val.todayStats);
+            },(res)=>console.log(res),
+            ()=>console.log("Today stat its completed")
+            )    
+
+  }
+  createEmptyStatForToday():void{
+    this.http.post<any>(`${this.apiBaseUrl}/api/add/stat`,{"userId":this.userId,"weight":0,"height":0})
+      .subscribe((val)=>{
+        console.log("");
+      },(res)=>console.log(res),
+      ()=>{console.log("Stat for today is created")
+      this.statForToday={
+        date:(new Date()).toString().slice(0,15),
+        weight:1,
+        height:1,
+        todayStats:this.todayStats}
+      console.log(this.statForToday);
+      })
+
+      
+  }
+  getTodayData():any{
+    return this.todayStats;
+  }
+  saveTodayData(val:any):void{
+    // console.log(val[0]);
+
+    this.todayData=[];
+    for(let i=0;i<val.length;i++)
+    {let temp:EXERCISE={
+      sets:val[i].exercise.sets,
+      mins:val[i].exercise.mins,
+      hrs:val[i].exercise.hrs,
+      reps:val[i].exercise.reps,
+      }
+      this.todayData.push({
+        exerciseName:val[i].exerciseName,
+        time:this.getTimeSpendOnDateUtil(temp)
+      })
+    }
+    
+  }
+  //for today
+  getExercisesList():ExerciseList{
+    let day=(new Date()).getDay();
+    console.log(this.weeks[day]);
+
+    return this.exercisesList[this.weeks[day]];
+  }
+  //returns time of particular exercise used
+  getTimeSpendOnDateUtil(val:EXERCISE):number{
+    
+    if(!(val.hrs||val.hrs))
+    {
+      return val.sets*val.reps;
+    }  
+    else{
+      if(!val.hrs) val.hrs=0;
+      return ((val.hrs/60))+val.mins;
+    }
+    return 1;
+  }
+
     getProfileExercisesList():ExerciseList[]{
       return this.exercisesList;
     }
-
+getOverallDataPromise(){
+    let todayDate:string=(new Date()).toString().slice(0,15);
+    
+    return this.http.post<any>(`${this.apiBaseUrl}/api/stats/overall`,
+          {"userId":this.userId}).toPromise();
+  }
   /***For Authentication***/
 
   private makeAuthApiCall(urlPath:string,user:User):Promise<AuthResponse>{
@@ -92,6 +201,13 @@ export class UserService {
 	}
 	
 
+   getTodayDataPromise(){
+    let todayDate:string=(new Date()).toString().slice(0,15);
+    
+    const res=  this.http.post<any>(`${this.apiBaseUrl}/api/stats/ondate`,
+          {"date":todayDate,"userId":this.userId}).toPromise()
+    return res;
+  }
 
   private getToken():string{
   	return this.storage.getItem("login");

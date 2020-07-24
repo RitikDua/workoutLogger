@@ -1,1 +1,16 @@
-<p>add works!</p>
+<div class="text-center">
+<h2 > Today's plan</h2></div>
+<mat-vertical-stepper [linear]="true" #stepper >
+  <mat-step *ngFor="let exercise of exercisesList" >
+     <ng-template matStepLabel>
+         {{exercise}}
+     </ng-template>
+
+
+     <app-addsets [exercise]="exercise" (notify)="changeFromChild($event)"></app-addsets>
+
+     
+
+
+    </mat-step>
+</mat-vertical-stepper>

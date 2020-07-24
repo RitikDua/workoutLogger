@@ -1,4 +1,4 @@
-<!-- 
+
 
 
 <div class="container">
@@ -7,7 +7,12 @@
     </div><br>
     <div class="container text-center" ><h1>{{username}}</h1>
         <div class="container text-center">
-    <button mat-raised-button color="primary" (click)="logout()">Log out</button></div>
+    <button mat-raised-button color="primary" (click)="logout()">Log out</button>
+    <br />
+    <a [routerLink]="['/add']">Add</a>
+    <br />
+    <a [routerLink]="['/stats']">Add</a>
+</div>
     </div>
 </div> 
 <hr />
@@ -21,7 +26,7 @@
 
 </div>
 
- -->
+
  <div class="row container">
  	<mat-button-toggle value="edit" (click)="editComponent()">edit</mat-button-toggle>
 </div>
@@ -46,7 +51,7 @@
 </div>
 <div *ngIf="isChecked">
 
-<mat-vertical-stepper [linear]="true" #stepper >
+<mat-vertical-stepper [linear]="true"  >
   <mat-step *ngFor="let day of weekDays" [stepControl]="day.key">
      <ng-template matStepLabel>
          {{day.day}}

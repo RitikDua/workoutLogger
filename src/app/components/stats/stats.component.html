@@ -1,1 +1,4 @@
-<p>stats works!</p>
+<h2>Stats</h2>
+<app-pie [pie]="pie"></app-pie>
+<button (click)="date()">Date</button>
+<app-date [dates]="dates" *ngIf="check"></app-date>

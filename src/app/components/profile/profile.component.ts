@@ -94,7 +94,7 @@ export class ProfileComponent implements OnInit {
  			else{
  				this.dataSource.push({
  					day:this.weeks[i],
- 					exercises:"NA"
+ 					exercises:"--"
  				})	
  			}
  		}
