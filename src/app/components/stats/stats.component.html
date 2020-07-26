@@ -1,4 +1,38 @@
-<h2>Stats</h2>
-<app-pie [pie]="pie"></app-pie>
-<button (click)="date()">Date</button>
-<app-date [dates]="dates" *ngIf="check"></app-date>
+<div class="container-fluid">
+<div class="row">
+	<div class="col-sm-7 container-fluid" *ngIf="check">
+		<div class="row">
+			<h1>Today</h1>
+		</div>
+	<div class="row">
+		<app-pie [pie]="pie"></app-pie>	
+	</div>
+	</div>
+
+	<div class="col-sm-5 container-fluid" *ngIf="check1">
+	<div class="row">
+			<h1>Overall</h1>
+		</div>
+	<div class="row">
+	<app-date [dates]="dates"></app-date>
+	</div>
+	</div>
+</div>
+
+<br />
+<br /><br />
+<mat-divider></mat-divider>
+<mat-divider></mat-divider>
+<mat-divider></mat-divider>
+
+<div class="row" *ngIf="check2">
+<div class="row container">
+
+<h1>Week<br></h1>
+</div>
+<div class="row container">
+	<app-bar [bar]="bar"></app-bar>		
+</div>
+</div>
+
+</div>

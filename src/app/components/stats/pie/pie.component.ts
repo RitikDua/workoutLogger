@@ -3,24 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {TODAY} from '../../../interfaces/data/today';
 import {UserService} from '../../../services/user.service';
-var single = [
-  {
-    "name": "Germany",
-    "value": 8940000
-  },
-  {
-    "name": "USA",
-    "value": 5000000
-  },
-  {
-    "name": "France",
-    "value": 7200000
-  },
-    {
-    "name": "UK",
-    "value": 6200000
-  }
-];
+
 @Component({
   selector: 'app-pie',
   templateUrl: './pie.component.html',
@@ -63,12 +46,9 @@ single: any[];
  
 
   ngOnInit(): void {
-setTimeout(()=>{
+
 this.single=this.pie;
     // this.todayData=this.userService.getTodayData();
-  	console.log(this.single);
-
-  }
-  ,2001)}
+  	console.log(this.single);}
 
 }

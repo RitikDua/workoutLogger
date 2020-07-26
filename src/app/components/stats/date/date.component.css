@@ -1,4 +1,4 @@
-/* Example - styles */
+/*/* Example - styles */
 
 #container {
     visibility: hidden;
@@ -76,7 +76,7 @@
     font-weight: normal;
     font-style: normal;
 }
- .not-active { 
+ table { 
             pointer-events: none; 
             cursor: default; 
         } 
@@ -84,8 +84,4 @@
     /*color:green  !important;*/
 /*background-color:rgba(1,222,1,0.6) !important;*/
 /*border:1px solid rgba(1,,1,0.6);*/
-}
- .e-selected.e-day{
-    color:green  !important;
-background-color:green !important;
 }
