@@ -41,6 +41,9 @@ export class UserService {
 			this.router.navigateByUrl("/login");
 		}
 	}
+  getUsername():string{
+    return this.username;
+  }
   addExercises(day:string,exerciseList:string[]):void{
      this.exercisesList[day.toLowerCase()]=exerciseList;
      let req=[];

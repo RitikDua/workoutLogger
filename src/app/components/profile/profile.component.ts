@@ -7,17 +7,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {WeekroutineComponent} from './weekroutine/weekroutine.component';
 import {ThemePalette} from '@angular/material/core';
 import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-
-];
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-profile',
@@ -69,6 +59,7 @@ export class ProfileComponent implements OnInit {
 
   		
   }
+  
   editComponent(){
   	this.isChecked=!this.isChecked;
   	console.log(this.isChecked)

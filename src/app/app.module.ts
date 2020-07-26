@@ -25,6 +25,10 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { PieComponent } from './components/stats/pie/pie.component';
 import { LineComponent } from './components/stats/line/line.component';
 import { DateComponent } from './components/stats/date/date.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SubprofileComponent } from './components/profile/subprofile/subprofile.component';
+import { QuotesComponent } from './components/add/quotes/quotes.component';
+import { BarComponent } from './components/stats/bar/bar.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { DateComponent } from './components/stats/date/date.component';
     AddsetsComponent,
     PieComponent,
     LineComponent,
-    DateComponent
+    DateComponent,
+    DashboardComponent,
+    SubprofileComponent,
+    QuotesComponent,
+    BarComponent
   ],
   imports: [CalendarModule,
   HttpClientModule,

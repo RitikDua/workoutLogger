@@ -1,20 +1,29 @@
 
-
-
-<div class="container">
-     <div id="profilePic" class="container text-center"> <mat-icon aria-hidden="false" aria-label="how to reg icon"
+ <div class="container">
+  <div class="row">
+    <div class="col-sm">
+        <div id="profilePic" class="container text-center"> <mat-icon aria-hidden="false" aria-label="how to reg icon"
         style="width:100px;font-size: 100px;"color="primary">how_to_reg</mat-icon>
     </div><br>
-    <div class="container text-center" ><h1>{{username}}</h1>
-        <div class="container text-center">
+    </div>
+    <div class="col-sm">
+        <div class="container text-center" ><h1>{{username}}</h1>
+        
+    </div>
+    
+    </div>
+    <div class="col-sm">
+      <div class="container text-center">
     <button mat-raised-button color="primary" (click)="logout()">Log out</button>
     <br />
-    <a [routerLink]="['/add']">Add</a>
-    <br />
-    <a [routerLink]="['/stats']">Add</a>
+    
 </div>
     </div>
-</div> 
+  </div>
+</div>
+
+
+<app-subprofile></app-subprofile> 
 <hr />
 <div class="label text-center">
 <h2>Add or update this week plan</h2>
@@ -32,17 +41,17 @@
 </div>
 
 <mat-spinner *ngIf="!isLoad&&!isChecked"></mat-spinner>
-<div *ngIf="isTable()&&!isChecked">
-	<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="table"  *ngIf="isTable()&&!isChecked">
+	<mat-table className="table" [dataSource]="dataSource" class="mat-elevation-z8">
  
   <ng-container matColumnDef="day">
     <mat-header-cell *matHeaderCellDef> Day</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.day}} </mat-cell>
+    <mat-cell *matCellDef="let element" style="text-transform:capitalize;"> {{element.day}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="exercises">
     <mat-header-cell *matHeaderCellDef> Exercises </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.exercises}} </mat-cell>
+    <mat-cell *matCellDef="let element" style="text-transform:capitalize;"> {{element.exercises}} </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -1,0 +1,27 @@
+.nav-ul li{
+	padding:15px;
+
+	font-style:"Helvetica";
+}
+
+.navhome{
+	width:50%;
+	margin-left:20%;
+
+	margin-right:20%;
+}
+.container-fluid-nav div{
+  display: flex;
+
+justify-content: space-around;}
+
+.navbar{
+	/*background-color:#3f51b5;*/
+
+	list-style: none;
+}
+
+/*
+#profile,#stats{
+	margin-left:100%;
+}*/

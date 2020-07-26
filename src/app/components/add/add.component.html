@@ -1,6 +1,13 @@
 <div class="text-center">
 <h2 > Today's plan</h2></div>
-<mat-vertical-stepper [linear]="true" #stepper >
+
+
+<div class="row">
+	<div class="col-sm-5" >
+  	<app-quotes></app-quotes>
+  	</div>
+
+  <div class="col-sm-7"><mat-vertical-stepper [linear]="true" #stepper >
   <mat-step *ngFor="let exercise of exercisesList" >
      <ng-template matStepLabel>
          {{exercise}}
@@ -13,4 +20,6 @@
 
 
     </mat-step>
-</mat-vertical-stepper>
+</mat-vertical-stepper></div>
+  
+  </div>

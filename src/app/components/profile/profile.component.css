@@ -12,3 +12,25 @@
 .example-margin {
   margin: 0 10px;
 }
+/* Structure */
+table {
+  width: 100%;
+}
+.table{
+	width:80%;
+	margin-left:10%;
+
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+.mat-row{
+  transition: transform 0.4s;
+}
+
+.mat-row:hover {
+transform:translateY(-10px);
+ box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}

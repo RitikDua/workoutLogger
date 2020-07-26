@@ -1,0 +1,21 @@
+.quote-box{
+	padding:20px;
+	background-color: #F2EECB;
+/*	border-radius: 10px;
+	border:2px solid rgba(72,58,40,0.7);
+	*/
+	/*height:720px;*/
+
+}
+.quote-box{
+font-family: 'Kaushan Script', cursive;	
+}
+.quote-box .quote{
+font-size:5vh;
+height:50%;
+}
+.quote-box .author{
+margin-top:20%;
+padding:10px;
+margin-left:10%;
+}

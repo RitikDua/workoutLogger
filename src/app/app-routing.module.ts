@@ -13,9 +13,9 @@ const routes: Routes = [
 	{path:"",redirectTo:"/login",pathMatch:'full'},
 		{path:'signup',component:SignupComponent},
 	{path:'login',component:LoginComponent}
-	,{path:'profile',component:HomeComponent},
-	{path:'add',component:AddComponent},
-	{path:'stats',component:StatsComponent},
+	,{path:'profile',component:HomeComponent,data: {animation: 'ProfilePage'}},
+	{path:'add',component:AddComponent,data: {animation: 'AddPage'}},
+	{path:'stats',component:StatsComponent,data: {animation: 'StatsPage'}},
 ];
 
 @NgModule({

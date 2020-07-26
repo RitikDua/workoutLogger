@@ -1,1 +1,26 @@
-<router-outlet></router-outlet>
+ 
+<div class=".container-fluid-nav text-center navhome">
+	<ul class="navbar">
+		<li>
+  <a id="profile" routerLink="/profile" routerLinkActive="active">Profile</a>
+		</li>
+
+		<li>
+  <a id="add" routerLink="/add" routerLinkActive="active">Add</a>
+		</li>
+
+		<li>
+  <a id="stats" routerLink="/stats" routerLinkActive="active">Stats</a>
+		</li>
+	</ul>
+</div>
+
+
+<div [@routeAnimations]="prepareRoute(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>
+
+<!--TEST-
+<div class="col-sm-6">
+<app-quotes></app-quotes>
+</div> -->
