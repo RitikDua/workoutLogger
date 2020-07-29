@@ -5,7 +5,7 @@ import {AuthResponse} from '../login/classes/authresponse';
 import {User} from '../login/classes/user';
 import  {HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject} from '@angular/core';
-import {BROWSER_STORAGE} from '../login/storage';
+import {BROWSER_STORAGE} from '../login/storage/storage';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Router} from '@angular/router';

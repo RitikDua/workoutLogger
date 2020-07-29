@@ -11,13 +11,14 @@ export class AddsetsComponent implements OnInit {
   @Output() notify:EventEmitter<Object>=new EventEmitter<Object>();;
   @Input() exercise:string;
 
-  sets:number;
-  reps:number;
-  mins:number;
-  hrs:number;
+  sets:number=null;
+  reps:number=null;
+  mins:number=null;
+  hrs:number=null;
   constructor(private userService:UserService,private _snackBar: MatSnackBar) { 
-  	this.sets=this.reps=this.mins=this.hrs=0;
-  }
+ 
+ 
+ }
 
   ngOnInit(): void {
   }
@@ -38,7 +39,8 @@ export class AddsetsComponent implements OnInit {
   	}
   }	  
   isTime():boolean{
-    return this.userService.isTime(this.exercise);
+  return (this.exercise.toLowerCase()==="running"||this.exercise.toLowerCase()==="rest"||this.exercise.toLowerCase()==="jogging"||this.exercise.toLowerCase()==="yoga")
+
   }
 
 }

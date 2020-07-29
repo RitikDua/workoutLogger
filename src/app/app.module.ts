@@ -1,63 +1,85 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {MaterialModule} from './material-module';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { environment } from '../environments/environment';
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MaterialModule} from './material-module';
-import { ProfileComponent } from './components/profile/profile.component';
-import { AddComponent } from './components/add/add.component';
-import {BottomNavModule} from 'ngx-bottom-nav';
-import { StatsComponent } from './components/stats/stats.component';
-import { WeekroutineComponent } from './components/profile/weekroutine/weekroutine.component';
-import { AddsetsComponent } from './components/add/addsets/addsets.component';
-import { LineChartComponent } from './components/stats/line-chart/line-chart.component';
-import { ChartsModule } from 'ng2-charts';
-import { DoughnutChartComponent } from './components/stats/doughnut-chart/doughnut-chart.component';
-import { BarChartComponent } from './components/stats/bar-chart/bar-chart.component';
-import { PieChartComponent } from './components/stats/pie-chart/pie-chart.component';
-import { RadarChartComponent } from './components/stats/radar-chart/radar-chart.component';
-import { SelectionComponent } from './components/stats/selection/selection.component';
-import { RegisterComponent } from './login/components/register/register.component';
-import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { LoginComponent } from './login/components/login/login.component';
-import {AuthGuard} from './login/guard/auth.guard';
-import {TokenInterceptorService} from './login/services/token-interceptor.service';
+import { SignupComponent } from './login/components/signup/signup.component';
+import { ClientComponent } from './login/components/client/client.component';
+import {AuthGuard} from './login/guards/auth.guard';
+import {TokenInterceptService} from './login/services/token-intercept.service';
+import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from './components/profile/profile.component';
+import { StatsComponent } from './components/stats/stats.component';
+import { AddComponent } from './components/add/add.component';
+import { WeekroutineComponent } from './components/profile/weekroutine/weekroutine.component';
+import { ModalComponent } from './components/profile/modal/modal.component';
+import { HomeComponent } from './components/home/home.component';
+import { AddsetsComponent } from './components/add/addsets/addsets.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PieComponent } from './components/stats/pie/pie.component';
+import { LineComponent } from './components/stats/line/line.component';
+import { DateComponent } from './components/stats/date/date.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SubprofileComponent } from './components/profile/subprofile/subprofile.component';
+import { QuotesComponent } from './components/add/quotes/quotes.component';
+import { BarComponent } from './components/stats/bar/bar.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
-import { ServiceWorkerModule } from '@angular/service-worker';
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent,
-    AddComponent,
-    StatsComponent,
-    WeekroutineComponent,
-    AddsetsComponent,
-    LineChartComponent,
-    DoughnutChartComponent,
-    BarChartComponent,
-    PieChartComponent,
-    RadarChartComponent,
-    SelectionComponent,
-    RegisterComponent,
     LoginComponent,
+    SignupComponent,
+    ClientComponent,
+    ProfileComponent,
+    StatsComponent,
+    AddComponent,
+    WeekroutineComponent,
+    ModalComponent,
+    HomeComponent,
+    AddsetsComponent,
+    PieComponent,
+    LineComponent,
+    DateComponent,
+    DashboardComponent,
+    SubprofileComponent,
+    QuotesComponent,
+    BarComponent,
+    MainNavComponent
   ],
-  imports: [HttpClientModule,
+  imports: [CalendarModule,
+  HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
-    ChartsModule,
-    BottomNavModule,
+    MaterialModule,  FormsModule,
     ReactiveFormsModule,
-   ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-  ],
+    NgxChartsModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule 
+  
+
+  ] ,
   providers: [AuthGuard,{
     provide:HTTP_INTERCEPTORS,
-    useClass:TokenInterceptorService,
+    useClass:TokenInterceptService,
     multi:true
   }],
   bootstrap: [AppComponent]

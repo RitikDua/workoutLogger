@@ -1,37 +1,66 @@
 
-<div class="container">
-     <div id="profilePic" class="container text-center"> <mat-icon aria-hidden="false" aria-label="how to reg icon"
-        style="width:100px;font-size: 100px;"color="primary">how_to_reg</mat-icon>
-    </div><br>
-    <div class="container text-center" ><h1>{{username}}</h1>
-        <div class="container text-center">
-    <button mat-raised-button color="primary" (click)="logout()">Log out</button></div>
-    </div>
-</div> 
-<hr />
-<div class="label text-center">
-<h2>Add or update this week plan</h2>
-    </div>
-<div class="row container ">
-<mat-divider></mat-divider>
-<mat-divider></mat-divider>
+<div class="row container-fluid">
+    <div class="col-sm-4 container-fluid">
+    <app-subprofile [username]="username"></app-subprofile> 
+  </div>
 
-<mat-vertical-stepper [linear]="true" #stepper >
+  <div class="col-sm-8 container-fluid">
+<div class="text-center spinner">
+<mat-spinner *ngIf="!isLoad&&!isChecked"></mat-spinner></div>
+<div class="table container-fluid"  *ngIf="isTable()&&!isChecked">
+  <div class="row container-fluid">
+  <div class="header text-center container-fluid">
+    <h1>Week Plan</h1>
+  </div>
+  <mat-table  [dataSource]="dataSource" class="mat-elevation-z8 table">
+ 
+  <ng-container matColumnDef="day">
+    <mat-header-cell *matHeaderCellDef> Day</mat-header-cell>
+    <mat-cell *matCellDef="let element" style="text-transform:capitalize;"> {{element.day}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="exercises">
+    <mat-header-cell *matHeaderCellDef> Exercises </mat-header-cell>
+    <mat-cell *matCellDef="let element" style="text-transform:capitalize;"> {{element.exercises}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="disclaimer">
+    <td mat-footer-cell *matFooterCellDef colspan="2"><mat-button-toggle value="edit" (click)="editComponent()" class="button">edit</mat-button-toggle>
+
+    </td>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <tr mat-footer-row *matFooterRowDef="['disclaimer']" class="example-second-footer-row">
+      
+    </tr>
+
+
+</mat-table>
+</div>
+</div>
+<div *ngIf="isChecked">
+
+  <div class="row container-fluid">
+  <mat-button-toggle value="edit" (click)="editComponent()">Close</mat-button-toggle></div>
+<mat-vertical-stepper [linear]="false"  >
   <mat-step *ngFor="let day of weekDays" [stepControl]="day.key">
      <ng-template matStepLabel>
          {{day.day}}
      </ng-template>
 
-
      <app-weekroutine [today]="day.day" (notify)="changeFromChild($event)"></app-weekroutine>
-
-
-
-
-
-
-
     </mat-step>
-</mat-vertical-stepper>
+    <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
 
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+    <mat-button-toggle value="edit" (click)="editComponent()">Close</mat-button-toggle>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+</div>  
+  </div>
 </div>
+

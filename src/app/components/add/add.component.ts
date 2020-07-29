@@ -17,24 +17,33 @@ export class AddComponent implements OnInit {
     
 	constructor(private userService:UserService) { 
     this.exercisesList=this.userService.getExercisesList();
+  	console.log(this.exercisesList);
   }
-  	ngOnInit(): void {
+  	ngOnInit(): void { 
+
+  		setTimeout(()=>{this.exercisesList=this.userService.getExercisesList();
+  	console.log(this.exercisesList);
+  },3000);
   	}
 
   changeFromChild(data){
-      let exercise:EXERCISE;
+      
+     console.log(data);
+      let exercise;//:EXERCISE;
       exercise={hrs:null,mins:null,reps:null,sets:null};
-     if(this.userService.isTime(data.exercise))
+     if(data.hrs|| data.mins)
      {
        exercise.hrs=data.hrs;
        exercise.mins=data.mins;
-       this.userService.addStatsOfOneExercise((new Date()).toString().slice(0,15),data.exercise.toLowerCase(),exercise);
+    
+       this.userService.addStatsOfOneExercise((new Date()).toString().slice(0,15),data.exercise.toLowerCase(),{"hrs":data.hrs,"mins":data.mins});
      } 
      else{
        exercise.reps=data.reps;
        exercise.sets=data.sets;
-       this.userService.addStatsOfOneExercise((new Date()).toString().slice(0,15),data.exercise.toLowerCase(),exercise);
+       this.userService.addStatsOfOneExercise((new Date()).toString().slice(0,15),data.exercise.toLowerCase(),{"sets":data.sets,"reps":data.reps});
      }
+
   }
 
 

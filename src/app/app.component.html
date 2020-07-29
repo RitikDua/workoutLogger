@@ -1,6 +1,43 @@
-<router-outlet></router-outlet>
-<br /><br /><br /><br />
-<div class="fixed-bottom">
-<ngx-bottom-nav [items]="items"></ngx-bottom-nav>
+<!--  
+<div class=".container-fluid-nav text-center navhome">
+	<ul class="navbar">
+		<li>
+  <a id="profile" >Profile</a>
+		</li>
+
+		<li>
+  <a id="add" routerLink="/add" routerLinkActive="active">Add</a>
+		</li>
+
+		<li>
+  <a id="stats" routerLink="/stats" routerLinkActive="active">Stats</a>
+		</li>
+	</ul>
 </div>
-<!-- <app-test></app-test> -->
+
+
+<div [@routeAnimations]="prepareRoute(outlet)">
+</div> -->
+
+<!-- TEST-
+<div class="container" style="width:1000px">
+
+<app-date></app-date>
+</div>  -->
+<div *ngIf="check()">
+  <mat-toolbar color="primary">
+ 	<span></span>
+  </mat-toolbar>
+
+
+<app-main-nav>
+
+  <router-outlet #outlet="outlet"></router-outlet>
+<!-- <app-stats></app-stats> -->
+</app-main-nav>
+</div>
+<div *ngIf="!check()">
+
+
+  <router-outlet #outlet="outlet"></router-outlet>
+	</div>

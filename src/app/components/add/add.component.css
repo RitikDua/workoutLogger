@@ -1,0 +1,32 @@
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+ .no-gutters > .col,
+.no-gutters  > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  
+}
+table{
+	border:0px;
+}
+.quote-box{
+	box-shadow: 
+}
+.quote-box{
+  transition: transform 0.4s;
+}
+
+.quote-box:hover {
+transform:translateY(-10px);
+ box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.add{
+
+ box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+}
+.btn{
+	border:1px solid black;
+}

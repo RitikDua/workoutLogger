@@ -1,2 +1,59 @@
-<app-selection></app-selection>
-<router-outlet></router-outlet>
+<div class="container-fluid">
+	<div class="row" *ngIf="check2" >
+		<div class="col-sm-2"></div>
+		<div class="col-sm-*">
+			<app-bar [bar]="bar"></app-bar>		
+		</div>
+
+
+</div>
+
+<div class="row container-fluid">
+	<div class="row container-fluid">
+		<div class="col-sm-4" *ngIf="check1">
+		
+		<app-date [dates]="dates"></app-date>
+	
+		</div>
+
+		<div class="col-sm-1"></div>
+		<div class="col-sm-4" *ngIf="check">
+	<app-pie [pie]="pie"></app-pie>		
+
+		</div>
+		
+	</div>
+	
+
+</div> 
+</div>
+
+<!-- <div class="container-fluid">
+<div class="row">
+	<div class="col-sm-7 container-fluid" *ngIf="check">
+		<div class="row">
+			<h1>Today</h1>
+		</div>
+	<div class="row">
+		<app-pie [pie]="pie"></app-pie>	
+	</div>
+	</div>
+
+	<div class="col-sm-5 container-fluid" *ngIf="check1">
+	<div class="row">
+			<h1>Overall</h1>
+		</div>
+	<div class="row">
+	</div>
+	</div>
+</div>
+
+<br />
+<br /><br />
+<mat-divider></mat-divider>
+<mat-divider></mat-divider>
+<mat-divider></mat-divider>
+
+
+</div>
+ -->
