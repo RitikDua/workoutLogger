@@ -15,7 +15,7 @@ export class BarComponent implements OnInit {
 weeks:string[]=[
   "sunday","monday","tuesday","wednesday","thursday","friday","saturday"
   ];
-  view = [window.screen.width-Number(window.screen.width/3), window.screen.height-Number(window.screen.height/2)];
+  view = [window.screen.width-Number(window.screen.width/3), window.screen.height-Number(10+window.screen.height/2)-100];
   
   // options
   showXAxis = true;
@@ -23,9 +23,9 @@ weeks:string[]=[
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Values';
+  xAxisLabel = 'WeekDays';
   showYAxisLabel = true;
-  yAxisLabel = 'Days';
+  yAxisLabel = 'Values';
 colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA',"#c1414a","#dd9933","#263246","#d3d6da","#7cc640","	#c7d70e","#b15a9f","#5ab16c"]
   };
@@ -33,7 +33,7 @@ colorScheme = {
 
   constructor() {
 
-this.view = [window.screen.width-Number(window.screen.width/3), window.screen.height-Number(window.screen.height/2)];
+this.view = [window.screen.width-Number(window.screen.width/3), window.screen.height-Number(10+window.screen.height/2)-100];
   
   }
 
@@ -54,6 +54,6 @@ this.view = [window.screen.width-Number(window.screen.width/3), window.screen.he
   ngOnInit(): void {
  this.single=this.bar;
 
-  this.view = [window.screen.width-Number(window.screen.width/3), window.screen.height-Number(window.screen.height/2)];
+  this.view = [window.screen.width-Number(window.screen.width/3), window.screen.height-Number(window.screen.height/2)-100];
 	}
 }

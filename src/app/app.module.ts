@@ -29,6 +29,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SubprofileComponent } from './components/profile/subprofile/subprofile.component';
 import { QuotesComponent } from './components/add/quotes/quotes.component';
 import { BarComponent } from './components/stats/bar/bar.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -49,7 +56,8 @@ import { BarComponent } from './components/stats/bar/bar.component';
     DashboardComponent,
     SubprofileComponent,
     QuotesComponent,
-    BarComponent
+    BarComponent,
+    MainNavComponent
   ],
   imports: [CalendarModule,
   HttpClientModule,
@@ -59,7 +67,13 @@ import { BarComponent } from './components/stats/bar/bar.component';
     MaterialModule,  FormsModule,
     ReactiveFormsModule,
     NgxChartsModule,
-    BrowserAnimationsModule 
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule 
   
 
   ] ,

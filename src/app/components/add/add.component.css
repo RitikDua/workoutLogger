@@ -22,3 +22,11 @@ table{
 transform:translateY(-10px);
  box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
+.add{
+
+ box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+}
+.btn{
+	border:1px solid black;
+}

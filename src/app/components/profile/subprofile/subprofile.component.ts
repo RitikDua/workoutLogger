@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input} from '@angular/core';
+import {UserService} from '../../../services/user.service';
+import  {Router} from '@angular/router';
 
 @Component({
   selector: 'app-subprofile',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./subprofile.component.css']
 })
 export class SubprofileComponent implements OnInit {
-
-  constructor() { }
+	@Input() username;
+  constructor(private userService:UserService,private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+
+  logout(){
+
+    let start=async()=>{this.userService.logout()}
+    start().then(()=>this.router.navigateByUrl("/login"));
   }
 
 }

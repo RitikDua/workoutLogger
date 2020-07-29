@@ -1,4 +1,34 @@
 <div class="container-fluid">
+	<div class="row" *ngIf="check2" >
+		<div class="col-sm-2"></div>
+		<div class="col-sm-*">
+			<app-bar [bar]="bar"></app-bar>		
+		</div>
+
+
+</div>
+
+<div class="row container-fluid">
+	<div class="row container-fluid">
+		<div class="col-sm-4" *ngIf="check1">
+		
+		<app-date [dates]="dates"></app-date>
+	
+		</div>
+
+		<div class="col-sm-1"></div>
+		<div class="col-sm-4" *ngIf="check">
+	<app-pie [pie]="pie"></app-pie>		
+
+		</div>
+		
+	</div>
+	
+
+</div> 
+</div>
+
+<!-- <div class="container-fluid">
 <div class="row">
 	<div class="col-sm-7 container-fluid" *ngIf="check">
 		<div class="row">
@@ -14,7 +44,6 @@
 			<h1>Overall</h1>
 		</div>
 	<div class="row">
-	<app-date [dates]="dates"></app-date>
 	</div>
 	</div>
 </div>
@@ -25,14 +54,6 @@
 <mat-divider></mat-divider>
 <mat-divider></mat-divider>
 
-<div class="row" *ngIf="check2">
-<div class="row container">
-
-<h1>Week<br></h1>
-</div>
-<div class="row container">
-	<app-bar [bar]="bar"></app-bar>		
-</div>
-</div>
 
 </div>
+ -->

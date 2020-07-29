@@ -1,8 +1,8 @@
- 
+<!--  
 <div class=".container-fluid-nav text-center navhome">
 	<ul class="navbar">
 		<li>
-  <a id="profile" routerLink="/profile" routerLinkActive="active">Profile</a>
+  <a id="profile" >Profile</a>
 		</li>
 
 		<li>
@@ -17,11 +17,21 @@
 
 
 <div [@routeAnimations]="prepareRoute(outlet)">
-  <router-outlet #outlet="outlet"></router-outlet>
-</div>
+</div> -->
 
 <!-- TEST-
 <div class="container" style="width:1000px">
 
 <app-date></app-date>
 </div>  -->
+
+  <mat-toolbar color="primary">
+ 	<span></span>
+  </mat-toolbar>
+
+
+<app-main-nav>
+
+  <router-outlet #outlet="outlet"></router-outlet>
+<!-- <app-stats></app-stats> -->
+</app-main-nav>

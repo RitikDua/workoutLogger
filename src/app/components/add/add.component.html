@@ -1,13 +1,11 @@
-<div class="text-center">
-<h2 > Today's plan</h2></div>
 
 
-<div class="row">
-	<div class="col-sm-5" >
-  	<app-quotes></app-quotes>
-  	</div>
+<div class="row text-center">
+	<div class="col-sm-2"></div>
 
-  <div class="col-sm-7"><mat-vertical-stepper [linear]="true" #stepper >
+  <div class="col-sm-7 add">
+    <h1>Today</h1>
+    <mat-vertical-stepper [linear]="false" #stepper >
   <mat-step *ngFor="let exercise of exercisesList" >
      <ng-template matStepLabel>
          {{exercise}}
@@ -20,6 +18,17 @@
 
 
     </mat-step>
+    <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+
+    <div>
+      <button mat-button matStepperPrevious class="btn btn-block">Back</button>
+
+    </div>
+  <p>Click the stats from menu</p>
+    
+  </mat-step>
 </mat-vertical-stepper></div>
   
+  <div class="col-sm-2"></div>
   </div>

@@ -1,4 +1,18 @@
 /*/* Example - styles */
+.e-control, .e-calendar, .e-lib,.e-keyboard
+{  margin-top:50%;
+    margin-left:50%;
+ transform:scale(1.5,1.5) !important;
+         box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+}
+
+
+.header{
+  margin-bottom: 0px;
+  /*box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);*/
+
+}
 
 #container {
     visibility: hidden;
@@ -84,4 +98,21 @@
     /*color:green  !important;*/
 /*background-color:rgba(1,222,1,0.6) !important;*/
 /*border:1px solid rgba(1,,1,0.6);*/
+}
+
+.not-active{
+    margin-left: 5%;
+    /*margin-top:15%;*/
+width:50%;
+
+/*border:1px solid black;*/
+}
+.header h2{
+    /*padding-left:10px;*/
+ 
+    padding-left:6px;
+
+    padding-right:6px;
+    font-weight: normal;font-size: 27px;
+
 }

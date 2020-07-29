@@ -8,20 +8,66 @@
   align-items: center;
   height: 60px;
 }
-
+.spinner{
+  align:center;
+  vertical-align: center;
+  margin:auto;
+}
 .example-margin {
   margin: 0 10px;
 }
 /* Structure */
+.mat-button-toggle-label-content{
+
+ 
+}
 table {
   width: 100%;
+
 }
+.button{
+margin-left:21vw;
+border:0px;
+font-weight: lighter;
+font-size: 26px;
+box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+}
+
+.header h2{
+  margin-left:20%;
+}
+.header{
+  font-family: "Helvetica";
+  border:1px solid black;
+  /*width:95%;*/
+  border:0px;
+  margin-top:3%;
+  font-weight: lighter;
+  margin-bottom: 0px;
+  box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+}
+/*
+.mat-footer-cell{
+   box-shadow: 0 2px 22px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+   width:;
+}*/
 .table{
-	width:80%;
-	margin-left:10%;
+
+	width:100%;
+  margin-top:0px;
+  height:100%;
+	/*margin-left:10%;*/
 
 }
+.mat-cell{
+  font-size: 15px !important;
 
+}
+.mat-header-cell{
+  font-size: 21px !important;
+}
 .mat-form-field {
   font-size: 14px;
   width: 100%;
