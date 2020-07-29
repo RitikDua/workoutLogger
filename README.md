@@ -1,6 +1,6 @@
 # WorkoutLogger
 
-A progressive web app to mainitain your daily workout . It also show your stats of exercises done so far.
+A MEAN stack project which can be used to mainitain your daily workout plan . It also shows your stats of exercises done so far.
 
 ## Description
 
