@@ -10,9 +10,9 @@ import {UserService} from '../../../services/user.service';
 export class LoginComponent implements OnInit {
   public formError:string='';
   public credentials={
-  	name:'',
-  	email:'',
-  	password:''
+    name:'',
+    email:'',
+    password:''
   }
   constructor(private router:Router,private authenticationService:UserService) { }
 
@@ -23,16 +23,16 @@ export class LoginComponent implements OnInit {
     else return false;
   }
   public onLoginSubmit():void{
-  	this.formError="";
-  	if(!this.credentials.email||!this.credentials.password)
-  		this.formError="All fields are Required";
-  	else this.doLogin();
+    this.formError="";
+    if(!this.credentials.email||!this.credentials.password)
+      this.formError="All fields are Required";
+    else this.doLogin();
   }
   private doLogin():void{
-  	this.authenticationService.login(this.credentials)
-  		.then(()=> this.router.navigateByUrl('/profile'))
-  		.catch((msg)=>{
-  			this.formError=msg
-  		});
+    this.authenticationService.login(this.credentials)
+      .then(()=> this.authenticationService.isLoggedIn()&&this.router.navigateByUrl('/profile'))
+      .catch((msg)=>{
+        this.formError=msg
+      });
   }
 }
