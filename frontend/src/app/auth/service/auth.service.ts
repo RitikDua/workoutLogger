@@ -1,6 +1,9 @@
 import { Inject,Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, UrlTree } from '@angular/router';
 import {BROWSER_STORAGE} from '../storage/storage';
 import {User} from '../classes/user';
+import  {HttpClient, HttpHeaders } from '@angular/common/http';
+
 import {AuthResponse} from '../classes/authresponse';
 
 @Injectable({
@@ -8,33 +11,56 @@ import {AuthResponse} from '../classes/authresponse';
 })
 export class AuthService {
 
-  constructor(@Inject(BROWSER_STORAGE) private storage:Storage) { }
+	apiBaseUrl="http://localhost:3000";
+  constructor(@Inject(BROWSER_STORAGE) private storage:Storage,private http:HttpClient, private router: Router) { }
 
    public getToken():string{
-  	const token:any=this.storage.getItem("login");
+  	const token:any=this.storage.getItem("workout-login");
   	if(!token) return "";
 
   	return token;
   }
   private saveToken(token:string):void{
-  	this.storage.setItem('login',token); 
+  	this.storage.setItem('workout-login',token); 
   }
  public isLoggedIn():boolean{
   	const token:string=this.getToken();
   	if(token){
   		const payload=JSON.parse(atob(token.split('.')[1]));
-  		return payload.exp>(Date.now()/1000);
+  		return payload.exp>(Date.now()/1000); //jwt expiry time default setItem
   	}
   	else{
   		return false;
   	}
   }
   public getCurrentUser():User{
-  	if(this.isLoggedIn()){
-  		const token:string=this.getToken();
+  		const token=this.getToken();
   		const {email,name}=JSON.parse(atob(token.split('.')[1]));
+  
+  	if(this.isLoggedIn()){
   		return {email,name} as User;
   	}
+  	else {
+  		//route to login
+		this.router.navigate(['/login'])
+  		return {email,name} as User;
+	}	
   }
 
+	private makeAuthApiCall(urlPath:string,user:User):Promise<AuthResponse>{
+		const url:string=`${this.apiBaseUrl}/${urlPath}`;
+		return this.http.post(url,user).toPromise().then((res)=>res as AuthResponse).catch((err)=> err);
+	}
+	public login(user:User):Promise<any>{
+  	return this.makeAuthApiCall("workout-login",user).then((authResp:AuthResponse)=>this.saveToken(authResp.token));
+  }
+
+  public register(user:User):Promise<any>{
+  	return this.makeAuthApiCall("signup",user).then((authResp:AuthResponse)=>this.saveToken(authResp.token));
+  }
+  public logout():void{
+  	this.storage.removeItem("workout-login");
+		this.router.navigate(['/login'])
+  }
+	
 }
