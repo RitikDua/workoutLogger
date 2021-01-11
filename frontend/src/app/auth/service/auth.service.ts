@@ -52,7 +52,7 @@ export class AuthService {
 		return this.http.post(url,user).toPromise().then((res)=>res as AuthResponse).catch((err)=> err);
 	}
 	public login(user:User):Promise<any>{
-  	return this.makeAuthApiCall("workout-login",user).then((authResp:AuthResponse)=>this.saveToken(authResp.token));
+  	return this.makeAuthApiCall("login",user).then((authResp:AuthResponse)=>this.saveToken(authResp.token));
   }
 
   public register(user:User):Promise<any>{

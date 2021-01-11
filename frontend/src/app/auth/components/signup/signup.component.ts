@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import  {Router} from '@angular/router';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -6,10 +8,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+	public formError:string='';
+	public credentials={
+		name:'',email:'',password:''
+	};
 
-  constructor() { }
+  constructor(private router:Router,private authService:AuthService) { }
 
   ngOnInit(): void {
+    	if(this.authService.isLoggedIn()) this.router.navigate(["/profile"])
+
   }
 
+  errorMsg():boolean{
+    console.log(this.formError);
+    if(this.formError.length !== 0) return true;
+    else return false;
+  }
+  public onRegisterSubmit():void{
+  	this.formError="";
+  	if(!this.credentials.name||!this.credentials.email||!this.credentials.password)
+  			this.formError="All fields are Required";
+  	else this.doRegister();
+  }
+  private doRegister():void{
+  	this.authService.register(this.credentials)
+  		.then(()=> this.router.navigateByUrl("/profile"))
+  		.catch((msg)=>this.formError=msg);
+  }
 }

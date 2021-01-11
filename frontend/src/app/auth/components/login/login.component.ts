@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import  {Router} from '@angular/router';
-// import {UserService} from '../../../services/user.service';
-
+import {AuthService} from '../../service/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,25 +14,36 @@ export class LoginComponent implements OnInit {
   	email:'',
   	password:''
   }
-  constructor(private router:Router) { }
+  constructor(private router:Router,private _snackBar: MatSnackBar,private authService:AuthService) { 
+
+  }
 
   ngOnInit(): void {
+  	if(this.authService.isLoggedIn()) this.router.navigate(["/profile"])
   }
   errorMsg():boolean{
-    if(this.formError.length !== 0) return true;
+
+    if(this.formError.length !== 0){ return true;}
     else return false;
   }
   public onLoginSubmit():void{
   	this.formError="";
   	if(!this.credentials.email||!this.credentials.password)
   		this.formError="All fields are Required";
-  	// else this.doLogin();
+  	else this.doLogin();
   }
-  // private doLogin():void{
-  // 	this.authenticationService.login(this.credentials)
-  // 		.then(()=> this.authenticationService.isLoggedIn()&&this.router.navigateByUrl('/profile'))
-  // 		.catch((msg)=>{
-  // 			this.formError=msg
-  // 		});
-  // }
+  private doLogin():void{
+  	this.authService.login(this.credentials)
+  		.then(()=> this.authService.isLoggedIn()&&this.router.navigateByUrl('/profile'))
+  		.catch((msg)=>{
+  			this.formError=msg
+  		});
+  }
+  public openSnackBar() {
+  	console.log("asd")
+    this._snackBar.open("not", "error", {
+      duration: 2000,
+    });
+  }
+
 }

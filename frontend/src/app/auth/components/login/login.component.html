@@ -1,19 +1,39 @@
+<div class="login-div">
 <mat-card class="example-card">
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  
+    <mat-card-title>Log In</mat-card-title>
+  
   </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+
   <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
-    </p>
+   <form class="example-form">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+            <input matInput placeholder="email"  type="email" id="email" name="email" [(ngModel)]="credentials.email"required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+        <td><mat-form-field class="example-full-width">
+          <input matInput type="password" id="password" name="password" placeholder="Password" [(ngModel)]="credentials.password" required>
+        </mat-form-field></td>
+      </tr></table>
+    </form>
+
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+    <button mat-raised-button (click)="onLoginSubmit()" color="primary">Login</button>
+
+
+	<p > Not a member? Please<a routerLink="/signup"> sign up</a> instead</p>
+
   </mat-card-actions>
 </mat-card>
+</div>
+
+<div *ngIf="errorMsg()">
+	<p>Error</p>
+</div>
