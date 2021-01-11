@@ -1,6 +1,8 @@
 
 
 require("dotenv").config();
+
+const morgan=require("morgan");
 const express=require("express");
 const mongoose=require("mongoose");
 const crypto=require("crypto");
@@ -23,6 +25,7 @@ const login=require("./controllers/login");
 const signup=require("./controllers/signup");
 
 const api=require("./api/api");
+app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
