@@ -1,0 +1,21 @@
+<div *ngIf="loading">loading</div>
+<div *ngIf="loading === false" >
+	 <h1>Profile</h1>
+	 <img src="{{user.profilePic}}" />
+	 <div>
+	 	<div class="row">
+	 		
+	 		<h3>Name: </h3>
+	 		<h3>{{user.name}}</h3>
+	 	</div>
+	 	<div class="row">
+	 		<h3>Email: </h3>
+	 		<h3>{{user.email}}</h3>
+	 	</div>
+	 	<div class="row">
+
+   			 <button mat-raised-button color="primary">Logout</button>
+	 	</div>
+	 	
+	 </div>
+</div>

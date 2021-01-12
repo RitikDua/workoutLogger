@@ -1,0 +1,28 @@
+<div *ngIf="loading">loading</div>
+<div *ngIf="loading === false">
+	 <div class="parent">
+<div class="div1"> 1</div>
+<div class="div2"> 
+	<div class="example-container" *ngFor="let exercise of  getTodaySchedule()">
+		  
+		  <mat-form-field hintLabel="Exercise name" appearance="fill">
+		    <mat-label>{{exercise.name}}</mat-label>
+		    <input matInput #input maxlength="10"  readonly="true">
+		    
+		  </mat-form-field>
+
+		  <mat-form-field appearance="fill">
+		    <mat-label>{{exercise.doneDuration}}</mat-label>
+		    <input type="number" matInput id="duration_{{exercise._id}}" maxlength="10" value=""  min=0 placeholder="" >
+		    
+
+		      <mat-hint align="end">Enter your workout duration (GOAL: {{exercise.reqDuration}} min)</mat-hint>
+		  </mat-form-field>
+   			 <button mat-raised-button color="primary" (click)="submitExercise(exercise)">Submit</button>
+
+	</div>
+
+</div>
+<div class="div3"> 3</div>
+</div> 
+</div>

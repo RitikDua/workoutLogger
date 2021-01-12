@@ -1,1 +1,20 @@
-<h1>profile works!</h1>
+<div *ngIf="loading">loading</div>
+<div *ngIf="loading === false">
+	<mat-grid-list cols="4" rowHeight="45vh">
+  <mat-grid-tile
+      *ngFor="let tile of tiles"
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows"
+      [style.background]="tile.color">
+    
+    <div [ngSwitch]="tile.text">  
+    <div *ngSwitchCase="'user'"><app-user></app-user></div>  
+    <div *ngSwitchCase="'line'"><app-line></app-line></div>  
+    <div *ngSwitchCase="'bar'"><app-bar></app-bar></div>  
+    <div *ngSwitchCase="'pie'"><app-pie></app-pie></div>  
+</div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+</div>

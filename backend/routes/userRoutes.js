@@ -11,7 +11,7 @@ router.use(authController.protect);
 // router.get('/',userController.getUsers);
 
 router.get('/',userController.getMe);
-router.get('/:userId',userController.getUserById);
+// router.get('/:userId',userController.getUserById);
 router.patch('/changePassword',userController.changePassword);
 router.patch('/updateMe',userController.updateMe);
 router.delete('/deleteMe',userController.deleteMe);

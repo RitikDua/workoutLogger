@@ -5,7 +5,10 @@ const scheduleSchema=new mongoose.Schema({
      type:mongoose.Schema.Types.ObjectId,
         ref:'Exercise'	
 	}],
-
+	date:{
+		type:String,
+		unique:true
+	},
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'

@@ -32,16 +32,34 @@ exports.getTodaySchedule=async(req,res)=>{
 exports.createTodaySchedule=async(req,res)=>{
 	try{
 		let arr=[],list=[];
-		const todayGoals=req.body.todayGoals;
-		console.log(todayGoals)
+		const todayGoals=req.body;
+		console.log(req.body)
+		let today = new Date();
+		let dd = today.getDate();
+
+		let mm = today.getMonth()+1; 
+		let yyyy = today.getFullYear();
+		if(dd<10) 
+		{
+		    dd='0'+dd;
+		} 
+
+		if(mm<10) 
+		{
+		    mm='0'+mm;
+		} 
+		let date=mm+'/'+dd+'/'+yyyy;
+		console.log(date);
 		await Promise.all(todayGoals.map(async (goal)=>{
 			const {name,reqDuration}=goal;
 			const exercise=await Exercise.create({name,reqDuration,user:req.user._id});
+			list.push({name,reqDuration,exerciseId:exercise._id});
 			arr.push(exercise._id);
 		}))
-		const schedule=await Schedule.create({user:req.user._id,exercises:arr})
+		const schedule=await Schedule.findOneAndUpdate({user:req.user._id,date:date},{exercises:arr},{upsert:true})
 		res.status(200).json({
-			schedule:schedule
+			schedule:schedule,
+			todayGoals:list
 		})
 	
 	}

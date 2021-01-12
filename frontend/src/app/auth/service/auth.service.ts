@@ -20,7 +20,8 @@ export class AuthService {
 
   	return token;
   }
-  private saveToken(token:string):void{
+  private saveToken(token:any):void{
+    console.log(token);
   	this.storage.setItem('workout-login',token); 
   }
  public isLoggedIn():boolean{
@@ -49,14 +50,22 @@ export class AuthService {
 
 	private makeAuthApiCall(urlPath:string,user:User):Promise<AuthResponse>{
 		const url:string=`${this.apiBaseUrl}/${urlPath}`;
-		return this.http.post(url,user).toPromise().then((res)=>res as AuthResponse).catch((err)=> err);
+		return this.http.post(url,user,{
+      withCredentials:true,
+    }).toPromise().then((res)=>{
+      console.log(res);
+      return  res as AuthResponse});
 	}
 	public login(user:User):Promise<any>{
-  	return this.makeAuthApiCall("login",user).then((authResp:AuthResponse)=>this.saveToken(authResp.token));
+  	return this.makeAuthApiCall("login",user).then((authResp:any)=>{
+      // console.log(authResp);
+      this.saveToken(authResp.data.token)
+
+  });
   }
 
   public register(user:User):Promise<any>{
-  	return this.makeAuthApiCall("signup",user).then((authResp:AuthResponse)=>this.saveToken(authResp.token));
+  	return this.makeAuthApiCall("signup",user).then((authResp:any)=>this.saveToken(authResp.data.token));
   }
   public logout():void{
   	this.storage.removeItem("workout-login");

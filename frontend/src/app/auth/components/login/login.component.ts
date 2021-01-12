@@ -26,19 +26,24 @@ export class LoginComponent implements OnInit {
     if(this.formError.length !== 0){ return true;}
     else return false;
   }
+
   public onLoginSubmit():void{
   	this.formError="";
   	if(!this.credentials.email||!this.credentials.password)
   		this.formError="All fields are Required";
   	else this.doLogin();
   }
-  private doLogin():void{
-  	this.authService.login(this.credentials)
+  
+  private async doLogin(){
+  	await this.authService.login(this.credentials)
   		.then(()=> this.authService.isLoggedIn()&&this.router.navigateByUrl('/profile'))
   		.catch((msg)=>{
   			this.formError=msg
+        console.log("ERR");
+        console.log(msg);
   		});
   }
+  
   public openSnackBar() {
   	console.log("asd")
     this._snackBar.open("not", "error", {

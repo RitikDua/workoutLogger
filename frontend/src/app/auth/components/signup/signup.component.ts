@@ -31,9 +31,11 @@ export class SignupComponent implements OnInit {
   			this.formError="All fields are Required";
   	else this.doRegister();
   }
-  private doRegister():void{
-  	this.authService.register(this.credentials)
-  		.then(()=> this.router.navigateByUrl("/profile"))
+  private async doRegister(){
+  	await this.authService.register(this.credentials)
+.then((res)=>{
+       this.router.navigate(['/profile'])
+      })
   		.catch((msg)=>this.formError=msg);
   }
 }
