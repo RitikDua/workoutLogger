@@ -85,7 +85,9 @@ exports.getMonthData=async (req,res,next)=>{
 	try{
 
 		const count=await Exercise.aggregate([
-
+		{
+			$match:{user:mongoose.Types.ObjectId(req.user._id)}
+		},
 			{$project : { 
               month : {$month : "$updatedAt"},
               // attemptResult:1

@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
   
   private async doLogin(){
   	await this.authService.login(this.credentials)
-  		.then(()=> this.authService.isLoggedIn()&&this.router.navigateByUrl('/profile'))
+  		.then(()=> this.authService.isLoggedIn()&&this.router.navigateByUrl('/add'))
   		.catch((msg)=>{
   			this.formError=msg
         console.log("ERR");

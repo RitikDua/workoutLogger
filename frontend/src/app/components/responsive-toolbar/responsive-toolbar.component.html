@@ -1,6 +1,6 @@
 <mat-toolbar fxLayout="row" color="primary">
     <span fxFlex>Workout Logger</span>
-    <button mat-button *ngFor="let item of menuItems" fxHide.xs>
+    <button mat-button *ngFor="let item of menuItems" fxHide.xs (click)="navigate(item)">
         <mat-icon class="mr">{{item.icon}}</mat-icon>
         {{item.label}}
     </button>
@@ -9,12 +9,15 @@
     </button>
     <mat-menu #dropMenu="matMenu">
         <ng-container *ngFor="let item of menuItems">
-            <button type="button" mat-menu-item (click)="navigate(item)">
+           	<!-- <a  routerLink="add"> -->
+            
+            <button type="button" mat-menu-item (click)="navigate(item)" >
             	
                 <mat-icon class="mr">{{item.icon}}</mat-icon>
                 {{item.label}}
             
             </button>
+        <!-- </a> -->
             <mat-divider></mat-divider>
         </ng-container>
     </mat-menu>

@@ -46,6 +46,8 @@ export class MainService {
 		}).toPromise().then((res)=>this.setTodaySchedule(res.schedule.exercises)).catch(err=>console.log(err)) 
 	}
 	setTodaySchedule(todayGoals:Exercise[]){
+		// if(!todayGoals||todayGoals.length !== 0)
+		// 	window.location.href="http://localhost:4200/schedule"
 		this.todayGoals=todayGoals;
 		console.log(todayGoals)
 	}

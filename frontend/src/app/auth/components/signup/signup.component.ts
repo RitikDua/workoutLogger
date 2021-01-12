@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
   private async doRegister(){
   	await this.authService.register(this.credentials)
 .then((res)=>{
-       this.router.navigate(['/profile'])
+       this.router.navigate(['/add'])
       })
   		.catch((msg)=>this.formError=msg);
   }

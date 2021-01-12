@@ -12,6 +12,7 @@ router.use(authController.protect);
 router.route('/month').get(statsController.getMonthData);
 router.route('/lastweek').get(statsController.getLastWeekData);
 router.route('/lastmonth').get(statsController.getLastMonthData);
+router.route('/month').get(statsController.getMonthData);
 
 // router.route("/user/dateRange")
 	   // .get(Stats.getData)
