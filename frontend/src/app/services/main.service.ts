@@ -13,8 +13,10 @@ import {Day} from '../interfaces/day';
 export class MainService {
 	apiBaseUrl="http://localhost:3000";
 	week=[{}];
-	today=[{}]
+	today=[{}];
+	months=[{}];
 	weekDays:string[]=["Sunday","Monday","Tueday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+	monthsNames:string[]=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 	user:User={
 		name:"",email:"",profilePic:""
 	};
@@ -24,12 +26,13 @@ export class MainService {
 			this.week[i]={
 				name:this.weekDays[i],value:0
 				};
+		for(let i =0;i< this.monthsNames.length;i++) 
+				this.months[i]={
+					name:this.monthsNames[i],value:0
+					};
+			
 	 }
 	
-	// getSchedule(){
-	// 	return this.http.get("")	
-	// }
-
 	async submitSchedule(todayGoals:any){
 		const url=`${this.apiBaseUrl}/schedule/create`;
 		return await this.http.post<any>(url,todayGoals,{
@@ -79,6 +82,13 @@ export class MainService {
 			withCredentials:true
 		}).toPromise().then((res)=>this.setWeekData(res.data)).catch((err)=>console.log(err));
 	}
+	async getMonthlyData(){
+
+		const url=`${this.apiBaseUrl}/stats/month`;
+		await this.http.get<any>(url,{
+			withCredentials:true
+		}).toPromise().then((res)=>this.setMonthData(res.data)).catch((err)=>console.log(err));
+	}
 	async getTodayData(){
 
 		const url=`${this.apiBaseUrl}/schedule/today`;
@@ -109,10 +119,21 @@ export class MainService {
 		}
 		console.log(this.week);
 	}
+	async setMonthData(data:any){
+		console.log(data)
+		for(let i=0;i<data.length;i++){
+			this.months[data[i]._id.month-1]={name:this.monthsNames[data[i]._id.month-1],
+				value:parseInt(data[i].total)};
+		}
+		console.log(this.months);
+	}
 	getWeekStats(){
 		return this.week;
 	}
 	getTodayStats(){
 		return this.today;
+	}
+	getMonthStats(){
+		return this.months;
 	}
 }
