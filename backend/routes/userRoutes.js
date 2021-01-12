@@ -9,6 +9,8 @@ router.get('/logout',authController.logout);
 router.route('/signup').post(authController.signup);
 router.use(authController.protect);
 // router.get('/',userController.getUsers);
+
+router.get('/',userController.getMe);
 router.get('/:userId',userController.getUserById);
 router.patch('/changePassword',userController.changePassword);
 router.patch('/updateMe',userController.updateMe);

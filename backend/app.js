@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const userRouter=require('./routes/userRoutes');
 const scheduleRouter=require('./routes/scheduleRoutes');
 const exerciseRouter=require('./routes/exerciseRoutes');
+const statsRouter=require('./routes/statsRoutes');
 
 const mongoose=require('mongoose');
 
@@ -24,6 +25,7 @@ app.use('/',userRouter);
 app.use('/schedule',scheduleRouter);
 
 app.use('/exercise',exerciseRouter);
+app.use('/stats',statsRouter);
 
 app.listen(3000,()=>{
 	console.log("Listen on 3000");

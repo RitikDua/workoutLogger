@@ -1,6 +1,23 @@
 const User=require(`../models/userModel`);
 
 
+exports.getMe=async (request,response)=>{
+    try{
+        const userId=request.user._id;
+        const user=await Users.findById(userId);
+        response.status(200).json({
+            status:'success',
+            data:{user}
+        });
+    }
+    catch (err){
+        response.status(500).json({
+            status:'error',
+            err:err.Users
+        });
+    }
+};
+
 exports.getUserById=async (request,response)=>{
     try{
         const userId=request.params.userId;
