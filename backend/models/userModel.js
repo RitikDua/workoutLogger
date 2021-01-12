@@ -5,7 +5,7 @@ const regularExpression=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(
 const {v4}=require('uuid');
 
 const userSchema = new mongoose.Schema({
-  name:{
+    name:{
         type:String,
         trim:true,
         required:[true,"Please provide your name"]
@@ -30,16 +30,26 @@ const userSchema = new mongoose.Schema({
         required:[true,"Please provide a password"],        
         select:false
     },
-  exercisesList:{ type:[{
-  	day:String,//Day of the week
-  	exercises:[String]
-  }],
-  default:null
-},
-  stats:{
-    type: [{type: mongoose.Schema.Types.ObjectId, ref:'Stat'}],default:null
-  }
-	// username:String
+    weight:Number,
+    height:Number,
+
+},{timestamps:true});
+
+userSchema.pre('save',async function(next){
+    if(!this.isModified('password')) 
+        return next(); 
+    this.password=await bcrypt.hash(this.password,10);
+    if(this.isNew){
+        this.coursesProgress={};        
+        return next();
+    }        
 });
-// console.log("FInd");
-module.exports=mongoose.model('Client', clientSchema);
+userSchema.methods.isPasswordValid=async function(inputPassword,dbHash){return await bcrypt.compare(inputPassword,dbHash);}
+
+userSchema.methods.createPasswordResetToken=async function(){
+    const resetToken=crypto.randomBytes(32).toString('hex');
+    this.passwordResetToken=crypto.createHash('sha256').update(resetToken).digest('hex');
+    this.passwordResetExpire=Date.now()+(10*60*1000);
+    return resetToken;
+}
+module.exports=mongoose.model('User',userSchema);
