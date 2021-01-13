@@ -1,6 +1,6 @@
 const Schedule=require(`../models/scheduleModel`);
 const Exercise=require(`../models/exerciseModel`);
-
+const mongoose=require("mongoose")
 exports.getTodaySchedule=async(req,res)=>{
 	try{
 		const now = new Date();
@@ -33,7 +33,8 @@ exports.createTodaySchedule=async(req,res)=>{
 	try{
 		let arr=[],list=[];
 		const todayGoals=req.body;
-		console.log(req.body)
+		console.log(req.body);
+		console.log(req.user);
 		let today = new Date();
 		let dd = today.getDate();
 
@@ -56,7 +57,8 @@ exports.createTodaySchedule=async(req,res)=>{
 			list.push({name,reqDuration,exerciseId:exercise._id});
 			arr.push(exercise._id);
 		}))
-		const schedule=await Schedule.findOneAndUpdate({user:req.user._id,date:date},{exercises:arr},{upsert:true})
+		const schedule=await Schedule.findOneAndUpdate({$and:[{user:mongoose.Types.ObjectId(req.user._id)},
+			{date:date}]},{exercises:arr},{upsert:true})
 		res.status(200).json({
 			schedule:schedule,
 			todayGoals:list

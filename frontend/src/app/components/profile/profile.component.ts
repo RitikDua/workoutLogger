@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MainService} from '../../services/main.service'
+import { Router} from '@angular/router';
 
 export interface Tile {
   color: string;
@@ -22,7 +23,7 @@ export class ProfileComponent implements OnInit {
     {text: 'pie', cols: 1, rows: 1, color: 'lightpink'},
     {text: 'bar', cols: 2, rows: 1, color: '#DDBDF1'},
   ];
-  constructor(private mainService:MainService) { 
+  constructor(private mainService:MainService,private router:Router) { 
   	// this.loading=this.mainService.todayGoals.length
   }
 
@@ -33,8 +34,10 @@ export class ProfileComponent implements OnInit {
   		  		console.log(this.mainService.todayGoals)
   	}
   	else{
-  		this.mainService.getTodaySchedule().then(()=>this.loading=false).catch((err)=>console.log(err));
-
+  		this.mainService.getTodaySchedule().then(()=>{
+		if(!this.mainService.todayGoals||this.mainService.todayGoals.length===0) this.router.navigate(['/schedule']);
+  
+  			this.loading=false;}).catch((err)=>console.log(err));
   	}
   }
 

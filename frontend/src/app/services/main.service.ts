@@ -20,7 +20,7 @@ export class MainService {
 	user:User={
 		name:"",email:"",profilePic:""
 	};
-	public todayGoals:Exercise[]=[];
+	public todayGoals:Object[]=[];
 	constructor(private http:HttpClient, private router: Router){
 		for(let i =0;i< this.weekDays.length;i++) 
 			this.week[i]={
@@ -58,6 +58,8 @@ export class MainService {
 				exerciseId:exerciseId,doneDuration:doneDuration
 			}
 		};
+		console.log("exercise");
+		console.log(exercise)
 		const url=`${this.apiBaseUrl}/exercise`;
 		
 		return await this.http.post<any>(url,exercise,{

@@ -25,7 +25,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
 
-const connect=mongoose.connect("mongodb://localhost:27017/workoutLogger",{useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex: true}).then((db)=>{
+const connect=mongoose.connect("mongodb://localhost:27017/workoutLogger",{useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex: true,useFindAndModify: false }).then((db)=>{
 	console.log("Database created");
 },(err)=>console.log(err));
 

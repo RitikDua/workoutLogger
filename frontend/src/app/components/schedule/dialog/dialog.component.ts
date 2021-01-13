@@ -75,7 +75,7 @@ export class DialogComponent implements OnInit {
    await this.mainService.submitSchedule(this.productForm.value.todayGoals)
   	.then(()=>{
   		this.dialogRef.close();
-  		this.router.navigate(["/add"])
+  		window.location.href="http://localhost:4200/add"
   	})
   	.catch((err)=>console.log(err));
 

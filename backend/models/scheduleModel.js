@@ -7,7 +7,7 @@ const scheduleSchema=new mongoose.Schema({
 	}],
 	date:{
 		type:String,
-		unique:true
+		
 	},
     user:{
         type:mongoose.Schema.Types.ObjectId,
