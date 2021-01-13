@@ -9,7 +9,7 @@ It is a basic application of MEAN stack. In this project user can sign up or log
 ## Requirements
 - Nodejs v12.18.0
 - npm v6.14.5
-- Angular v9
+- Angular v11
 - MongoDB
 
 ## How To Start

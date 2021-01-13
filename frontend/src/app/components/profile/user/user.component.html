@@ -1,0 +1,25 @@
+<div *ngIf="loading">loading</div>
+<div *ngIf="loading === false" >
+	 <mat-card >
+	 <div style="padding:3vw">
+	 <h1>Profile</h1>
+	 <img src="{{user.profilePic}}" />
+	 <div>
+	 	<div class="row">
+	 		
+	 		<h3>Name: </h3>
+	 		<h3>{{user.name}}</h3>
+	 	</div>
+	 	<div class="row">
+	 		<h3>Email: </h3>
+	 		<h3>{{user.email}}</h3>
+	 	</div>
+	 	<div class="row">
+
+   			 <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+	 	</div>
+	 	
+	 </div>
+	</div>
+	</mat-card>
+</div>

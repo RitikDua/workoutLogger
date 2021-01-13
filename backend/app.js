@@ -1,53 +1,41 @@
 
-
 require("dotenv").config();
-const express=require("express");
-const mongoose=require("mongoose");
-const crypto=require("crypto");
-// const path=require("path");
-const app=express();
-const cors = require("cors");
-// const logger=require("logger");
-const auth = require('./routes/routes');
-const bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+const userRouter=require('./routes/userRoutes');
+const scheduleRouter=require('./routes/scheduleRoutes');
+const exerciseRouter=require('./routes/exerciseRoutes');
+const statsRouter=require('./routes/statsRoutes');
+const cors=require("cors");
+const mongoose=require('mongoose');
+app.use((request,response,next)=>{
+	response.header("Access-Control-Allow-Origin", "http://localhost:4200");
+	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	response.header("Access-Control-Allow-Credentials", "true");
+	response.header('Access-Control-Allow-Methods',"GET","POST","PATCH","DELETE");
+	if(request.method==='OPTIONS')
+		return response.status(200).json({status:'success'});
+	next();
+});
+// app.use(cors());
+app.use(morgan("dev"));
 
-const passport=require("passport");
-require("./models/User");
+app.use(express.json());
+app.use(cookieParser());
 
-// const Test=mongoose.model("Test");
-// const Child=mongoose.model("Child");
+const connect=mongoose.connect("mongodb://localhost:27017/workoutLogger",{useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex: true,useFindAndModify: false }).then((db)=>{
+	console.log("Database created");
+},(err)=>console.log(err));
 
 
-require("./config");
-const login=require("./controllers/login");
-const signup=require("./controllers/signup");
+app.use('/',userRouter);
+app.use('/schedule',scheduleRouter);
 
-const api=require("./api/api");
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(cors());
-// app.use(logger("dev"));
-// app.use(express.urlencoded({extended:false}));
-app.use(passport. initialize());
+app.use('/exercise',exerciseRouter);
+app.use('/stats',statsRouter);
+
 app.listen(3000,()=>{
 	console.log("Listen on 3000");
 });
-
-const connect=mongoose.connect("mongodb://localhost:27017/workoutLogger",{useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex: true}).then((db)=>{
-	console.log("Db created");
-},(err)=>console.log(err));
-// app.use('/', apiRouter);
-
-// app.post("/",(req,res)=>res.send("jh"))
-
-app.post("/signup",signup);
-app.post("/login",login)
-app.use("/api",auth,api);
-app.use((err,req,res,next)=>{
-	if(err.name==="UnauthorizedError"){
-		res.status(401).json({"message":err.name+": "+err.message});
-	}
-})
-
-
-// console.log(process.env.JWT_SECRET);
