@@ -65,7 +65,9 @@ exports.logout = async (request,response)=>{
             message:'Logged out successfully'
         });
     }
-    catch (err){response.status(500).json({status:'error',err});}
+    catch (err){
+console.log(err);
+        response.status(500).json({status:'error',err});}
 };
 exports.signup = async (request,response)=>{
    console.log("asd");

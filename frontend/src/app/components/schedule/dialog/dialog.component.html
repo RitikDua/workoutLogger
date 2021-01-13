@@ -11,7 +11,7 @@
 
         <th colspan="2">Add Multiple Exercises</th>
 
-        <th width="150px"><button type="button" (click)="addQuantity()" class="btn btn-primary">Add More</button></th>
+        <th width="150px"><a href="http://localhost:4200/add">Edit Logs</a></th>
 
       </tr>
 
@@ -29,13 +29,13 @@
 
             Duration Goal:
 
-            <input type="text" formControlName="reqDuration" class="form-control">
+            <input type="number" formControlName="reqDuration" class="form-control">
 
         </td>
 
-        <td>
+        <td >
 
-            <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+            <button (click)="removeQuantity(i)" class="btn btn-danger">X</button>
 
         </td>
 
@@ -47,7 +47,7 @@
 
     <button type="submit" class="btn btn-success">Submit</button>
 
-    
+    <button type="button" (click)="addQuantity()" class="btn btn-primary">Add More Exercise</button>
 
   </form>
 
@@ -55,6 +55,6 @@
 
   <br/>
 
-  <!-- {{this.productForm.value | json}} -->
+
 
 </div>

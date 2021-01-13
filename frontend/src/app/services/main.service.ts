@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject,Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, UrlTree } from '@angular/router';
 // import {BROWSER_STORAGE} from '../storage/storage';
 // import {User} from '../classes/user';
@@ -6,7 +6,7 @@ import  {HttpClient, HttpHeaders } from '@angular/common/http';
 import {Exercise} from '../interfaces/exercise';
 import {User} from '../interfaces/user';
 import {Day} from '../interfaces/day';
-
+import {BROWSER_STORAGE} from '../auth/storage/storage';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,8 +20,8 @@ export class MainService {
 	user:User={
 		name:"",email:"",profilePic:""
 	};
-	public todayGoals:Object[]=[];
-	constructor(private http:HttpClient, private router: Router){
+	public todayGoals:Exercise[]=[];
+	constructor(@Inject(BROWSER_STORAGE) private storage:Storage,private http:HttpClient, private router: Router){
 		for(let i =0;i< this.weekDays.length;i++) 
 			this.week[i]={
 				name:this.weekDays[i],value:0
@@ -31,6 +31,15 @@ export class MainService {
 					name:this.monthsNames[i],value:0
 					};
 			
+
+
+	 }
+
+	 async logout(){		
+	this.storage.removeItem("workout-login");
+		// this.router.navigate(['/login'])
+  	window.location.href="http://localhost:4200/login"
+
 	 }
 	
 	async submitSchedule(todayGoals:any){

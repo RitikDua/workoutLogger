@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import  {Router} from '@angular/router';
 import {AuthService} from '../../service/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,7 @@ export class SignupComponent implements OnInit {
 		name:'',email:'',password:''
 	};
 
-  constructor(private router:Router,private authService:AuthService) { }
+  constructor(private _snackBar: MatSnackBar,private router:Router,private authService:AuthService) { }
 
   ngOnInit(): void {
     	if(this.authService.isLoggedIn()) this.router.navigate(["/profile"])
@@ -36,6 +37,11 @@ export class SignupComponent implements OnInit {
 .then((res)=>{
        this.router.navigate(['/add'])
       })
-  		.catch((msg)=>this.formError=msg);
+  		.catch((msg)=>{this.formError=msg
+
+                  this._snackBar.open("Username/email already exist", "ERROR", {
+                  duration: 2000,
+                });
+      });
   }
 }

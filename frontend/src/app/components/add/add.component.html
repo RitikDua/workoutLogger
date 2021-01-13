@@ -1,28 +1,39 @@
 <div *ngIf="loading">loading</div>
 <div *ngIf="loading === false">
 	 <div class="parent">
-<div class="div1"> 1</div>
+<div class="div1"> 
+	<table>
+		<tr><td>
+	<img src="assets/images/1.png" class="image-add"/></td></tr><tr><td>
+	<img src="assets/images/5.png"  class="image-add"/></td></tr><tr><td>
+	<img src="assets/images/4.png"  class="image-add"/></td></tr></table>
+</div>
 <div class="div2"> 
-	<div class="example-container" *ngFor="let exercise of  getTodaySchedule()">
-		  
+	<div class="example-container" *ngFor="let exercise of  getTodaySchedule()" [style.margin]="'3vh'">
+		<mat-card style="text-align: center;">	  
 		  <mat-form-field hintLabel="Exercise name" appearance="fill">
 		    <mat-label>{{exercise.name}}</mat-label>
 		    <input matInput #input maxlength="10"  readonly="true">
 		    
 		  </mat-form-field>
 
-		  <mat-form-field appearance="fill">
+		  <mat-form-field appearance="fill"  [style.marginLeft]="'20px'">
 		    <mat-label>{{exercise.doneDuration}}</mat-label>
 		    <input type="number" matInput id="duration_{{exercise._id}}" maxlength="10" value=""  min=0 placeholder="" >
 		    
 
 		      <mat-hint align="end">Enter your workout duration (GOAL: {{exercise.reqDuration}} min)</mat-hint>
 		  </mat-form-field>
-   			 <button mat-raised-button color="primary" (click)="submitExercise(exercise)">Submit</button>
-
+   			 <button mat-raised-button color="primary" (click)="submitExercise(exercise)" [style.marginLeft]="'20px'">Submit</button>
+   			</mat-card>
 	</div>
 
 </div>
-<div class="div3"> 3</div>
+<div class="div3"> 
+	<table>
+		<tr><td>
+	<img src="assets/images/2.png" class="image-add"/></td></tr><tr><td>
+	<img src="assets/images/3.png"  class="image-add"/></td></tr><tr><td>
+	<img src="assets/images/6.png"  class="image-add"/></td></tr></table></div>
 </div> 
 </div>

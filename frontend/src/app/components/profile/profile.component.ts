@@ -18,10 +18,10 @@ export interface Tile {
 export class ProfileComponent implements OnInit {
   loading:boolean=true;
   tiles: Tile[] = [
-    {text: 'line', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'user', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'pie', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'bar', cols: 2, rows: 1, color: '#DDBDF1'},
+    {text: 'line', cols: 3, rows: 1, color: 'rgba (252,252,252,0.9) '},
+    {text: 'user', cols: 1, rows: 2, color: 'rgba (252,252,252,0.9) '},
+    {text: 'pie', cols: 1, rows: 1, color: 'rgba (252,252,252,0.9) '},
+    {text: 'bar', cols: 2, rows: 1, color: 'rgba (252,252,252,0.9) '},
   ];
   constructor(private mainService:MainService,private router:Router) { 
   	// this.loading=this.mainService.todayGoals.length

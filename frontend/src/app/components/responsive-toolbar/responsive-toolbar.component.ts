@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class ResponsiveToolbarComponent implements OnInit {
 	menuItems:MenuItem[]=[
 		{label:'Add',icon:'add',route:'add'},
-		{label:'Stats',icon:'insights',route:'profile'},
+		{label:'Dashboard',icon:'insights',route:'profile'},
 		{label:'Create',icon:"create",route:"schedule"}
 	]
 	item=this.menuItems[0];

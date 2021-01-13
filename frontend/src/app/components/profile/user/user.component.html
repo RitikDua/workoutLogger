@@ -1,5 +1,7 @@
 <div *ngIf="loading">loading</div>
 <div *ngIf="loading === false" >
+	 <mat-card >
+	 <div style="padding:3vw">
 	 <h1>Profile</h1>
 	 <img src="{{user.profilePic}}" />
 	 <div>
@@ -14,8 +16,10 @@
 	 	</div>
 	 	<div class="row">
 
-   			 <button mat-raised-button color="primary">Logout</button>
+   			 <button mat-raised-button color="primary" (click)="logout()">Logout</button>
 	 	</div>
 	 	
 	 </div>
+	</div>
+	</mat-card>
 </div>

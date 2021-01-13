@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MainService} from '../../services/main.service'
 import {ExerciseList} from '../../interfaces/exercise-list';
+import {Exercise} from '../../interfaces/exercise';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { Router} from '@angular/router';
 
 @Component({
@@ -10,9 +12,9 @@ import { Router} from '@angular/router';
 })
 export class AddComponent implements OnInit {
   loading:boolean=true;
-  exerciseList:ExerciseList[]=[];
+  exerciseList:Exercise[]=[];
  
-  constructor(private mainService:MainService,private router:Router) { 
+  constructor(private _snackBar: MatSnackBar,private mainService:MainService,private router:Router) { 
   	// this.loading=this.mainService.todayGoals.length
   }
 
@@ -29,8 +31,8 @@ export class AddComponent implements OnInit {
   			this.loading=false;}).catch((err)=>console.log(err));
   	}
   }
-
-  getTodaySchedule(){
+  
+  getTodaySchedule():Exercise[]{
   	return this.mainService.todayGoals;
   }
   async submitExercise(exercise:any){
@@ -39,7 +41,16 @@ export class AddComponent implements OnInit {
   	else duration=duration.value;
   	console.log(exercise);
   	await this.mainService.submitExercise(exercise._id,duration)
-  		.catch((err)=>console.log(err));
+  		.then(()=>{
+  			this._snackBar.open("exercise", "updated", {
+      duration: 2000,
+    });
+  		})
+  		.catch((err)=>{console.log(err)
+  				this._snackBar.open("exercise", "ERROR", {
+						      duration: 2000,
+						    });
+  		});
   
   }
 }

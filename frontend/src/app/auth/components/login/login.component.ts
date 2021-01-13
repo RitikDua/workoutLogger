@@ -39,6 +39,9 @@ export class LoginComponent implements OnInit {
   		.then(()=> this.authService.isLoggedIn()&&this.router.navigateByUrl('/add'))
   		.catch((msg)=>{
   			this.formError=msg
+                  this._snackBar.open("User not found", "ERROR", {
+                  duration: 2000,
+                });
         console.log("ERR");
         console.log(msg);
   		});
