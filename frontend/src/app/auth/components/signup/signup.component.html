@@ -1,43 +1,66 @@
+<mat-toolbar color="primary">
+    <h1 class="center">Workout Logger</h1>
+</mat-toolbar>
 
-<div class="login-div">
+<mat-grid-list cols="10" rowHeight='100%'>
+  <mat-grid-tile colspan="4">
+  
 
-<mat-card class="example-card">
-  <mat-card-header>
-    
-    <mat-card-title>Sign Up</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form class="example-form">
-      <table class="example-full-width" cellspacing="0">
-        <tr>
-          <td>
-            <mat-form-field class="example-full-width">
+<!-- Mixins-->
+<!-- Pen Title-->
+
+<div class="login-container">
+  <div class="login-card"></div>
+  <div class="login-card">
+    <h1 class="title">SignUp</h1>
+    <form>
+      
+      <div class="input-container">
+        <mat-form-field class="example-full-width">
+            <mat-label>Username</mat-label>
             <input matInput id="name" name="name" placeholder="Username"  [(ngModel)]="credentials.name"required>
             </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <mat-form-field class="example-full-width">
-            <input matInput placeholder="email"  type="email" id="email" name="email" [(ngModel)]="credentials.email"required>
+        <!-- <label for="#{label}">Email</label> -->
+        <!-- <div class="bar"></div> -->
+      </div>
+      <div class="input-container">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email"  type="email" id="email" name="email" [(ngModel)]="credentials.email"required>
             </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-        <td><mat-form-field class="example-full-width">
-          <input matInput type="password" id="password" name="password" placeholder="Password" [(ngModel)]="credentials.password" minlength=6 required>
-        </mat-form-field></td>
-      </tr></table>
-    </form>
-    <!-- <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner> -->
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button (click)="onRegisterSubmit()" color="primary">Register</button>
-    <p class="alert danger" *ngIf="errorMsg()">username or email is already exist</p>
+      </div>
 
-	<p > Already a member? Please<a routerLink="/login"> log in</a> instead</p>
-  </mat-card-actions>
-</mat-card>
+      <div class="input-container">
+        <mat-form-field class="example-full-width">
+          <input matInput type="password" id="password" name="password" placeholder="Password" [(ngModel)]="credentials.password" minlength=6 required>
+        </mat-form-field>
+      </div>
+      <div class="button-container">
+        
+    <button mat-raised-button (click)="onRegisterSubmit()" >Register</button>
+      </div>
+      <div class="footer"> 
+        Already a member? <br /><a routerLink="/login"> log in</a> instead</div>
+    </form>
+  </div>
+ 
+</div>
+
+
+
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="6" class="banner">
+     <div class="image-container">
+       <img src="assets/images/7.jpg"  class="image-login" width="100%" />
+        <div class="top-left">
+          <h1 style="font-size:7vh">Be fit</h1>
+        </div>  
+      </div>
+
+   
+  </mat-grid-tile>
+
+</mat-grid-list>
 
 
 <div *ngIf="errorMsg()">
