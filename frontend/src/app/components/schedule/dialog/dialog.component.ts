@@ -12,7 +12,7 @@ export class DialogComponent implements OnInit {
   name = 'Angular';
   productForm: FormGroup;
 
-   
+  loading:boolean=false;
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,private fb:FormBuilder,private mainService:MainService,private router:Router) { 
   	    this.productForm = this.fb.group({
@@ -22,10 +22,34 @@ export class DialogComponent implements OnInit {
       todayGoals: this.fb.array([this.newQuantity()]) ,
 
     });
+        let formControl=<FormArray> this.productForm.controls.todayGoals;
+  if(this.mainService.todayGoals&&this.mainService.todayGoals.length!==0){
+      this.loading=false;
+      this.mainService.todayGoals.forEach((data)=>{
+        formControl.push(
+              this.fb.group({
+                name:data.name,
+                reqDuration:data.reqDuration
+              })
+          )
+      })
+    }
+    else{
+        this.mainService.getTodaySchedule().then(()=>{
+      this.mainService.todayGoals.forEach((data)=>{
+        formControl.push(
+              this.fb.group({
+                name:data.name,
+                reqDuration:data.reqDuration
+              })
+          )
+      })
+      console.log(this.mainService.todayGoals);
+        this.loading=false;}).catch((err)=>console.log(err));
+    }  
   }
 
   ngOnInit(): void {
-  	
   }
 
   onSubmitClik():void{

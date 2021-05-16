@@ -7,6 +7,8 @@ import {Exercise} from '../interfaces/exercise';
 import {User} from '../interfaces/user';
 import {Day} from '../interfaces/day';
 import {BROWSER_STORAGE} from '../auth/storage/storage';
+import { Observable } from "rxjs";  
+
 @Injectable({
   providedIn: 'root'
 })
@@ -34,7 +36,12 @@ export class MainService {
 
 
 	 }
+	 //get schedule on default
+	 getSchedule():Observable<Exercise[]>{
+		const url=`${this.apiBaseUrl}/schedule/today`;
 
+	 	return this.http.get<Exercise[]>(url);
+	 }
 	 async logout(){		
 	this.storage.removeItem("workout-login");
 		// this.router.navigate(['/login'])
